@@ -18,4 +18,4 @@ yarn build
 ## License
 [MIT](https://github.com/PanJiaChen/vueAdmin-template/blob/master/LICENSE) license.
 
-Copyright (c) youxin.com
+Copyright (c) youxin.com & jnoodle
