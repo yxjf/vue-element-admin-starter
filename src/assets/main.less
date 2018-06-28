@@ -1,0 +1,63 @@
+body {
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, SimSun, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+// login-container
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #204e6d url(background.jpg) 0 0 no-repeat;
+
+  .login-form {
+    display: block;
+    margin: 15vh auto 0;
+    padding: 20px 30px 60px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #f9f9f9;
+    background-color: rgba(11, 56, 85, 0.5);
+
+    h3 {
+      font-size: 26px;
+      font-weight: 200;
+      letter-spacing: 2px;
+      margin-bottom: 26px;
+    }
+
+    input {
+      background: transparent;
+      color: #f9f9f9;
+      border-color: rgba(255, 255, 255, 0.4);
+
+      &:focus {
+        background-color: rgba(11, 56, 85, 0.2);
+        border-color: rgba(255, 255, 255, 0.6);
+      }
+
+      &.is-error {
+        border-color: #ff9595;
+      }
+    }
+
+    .el-form-item__error {
+      color: #ff9595;
+    }
+
+    .fa {
+      color: #f9f9f9;
+    }
+
+    .submit {
+      width: 100%;
+      font-size: 16px;
+    }
+  }
+
+}

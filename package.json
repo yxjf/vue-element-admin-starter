@@ -14,10 +14,13 @@
     "element-ui": "^2.4.2",
     "normalize.css": "^8.0.0",
     "nprogress": "^0.2.0",
+    "pubsub-js": "^1.6.0",
+    "store": "^2.0.12",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",

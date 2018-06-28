@@ -718,6 +718,10 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@fortawesome/fontawesome-free@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.1.0.tgz#f35f5ba91366b7a58b0b6a4f22ff0907fe002219"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npmjs.org/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -5350,6 +5354,10 @@ public-encrypt@^4.0.0:
     parse-asn1 "^5.0.0"
     randombytes "^2.0.1"
 
+pubsub-js@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.npmjs.org/pubsub-js/-/pubsub-js-1.6.0.tgz#232d36485ce7905a54629ec5783d9f6f4c638026"
+
 pump@^2.0.0, pump@^2.0.1:
   version "2.0.1"
   resolved "https://registry.npmjs.org/pump/-/pump-2.0.1.tgz#12399add6e4cf7526d973cbc8b5ce2e2908b3909"
@@ -6112,6 +6120,10 @@ statuses@~1.4.0:
 stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
+
+store@^2.0.12:
+  version "2.0.12"
+  resolved "https://registry.npmjs.org/store/-/store-2.0.12.tgz#8c534e2a0b831f72b75fc5f1119857c44ef5d593"
 
 stream-browserify@^2.0.1:
   version "2.0.1"
