@@ -29,8 +29,15 @@
     },
     methods: {
       logout() {
-        api.logout().then(() => {
-          this.$router.push({path: '/login'})
+        this.$confirm('是否退出系统？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          api.logout().then(() => {
+            this.$router.push({path: '/login'})
+          })
+        }).catch(() => {
         })
       }
     }

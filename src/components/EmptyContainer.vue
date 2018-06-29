@@ -1,11 +1,9 @@
 <template>
-  <div>
-    welcome
-  </div>
+  <router-view/>
 </template>
 
 <script>
   export default {
-    name: 'welcome'
+    name: 'EmptyContainer'
   }
 </script>

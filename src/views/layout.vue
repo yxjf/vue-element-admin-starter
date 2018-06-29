@@ -5,12 +5,12 @@
         <topbar></topbar>
       </el-header>
       <el-container>
-        <el-aside width="220px">
-          <sidebar></sidebar>
+        <el-aside :class="{ collapse: isCollapse }">
+          <sidebar :is-collapse="isCollapse"></sidebar>
         </el-aside>
         <el-container>
           <el-header>
-            <navbar></navbar>
+            <navbar :is-collapse="isCollapse"></navbar>
           </el-header>
           <el-main>
             <transition name="fade" mode="out-in">
@@ -27,6 +27,8 @@
   import Topbar from '@/components/Topbar'
   import Sidebar from '@/components/Sidebar'
   import Navbar from '@/components/Navbar'
+  import store from '@/utils/store'
+  import PubSub from 'pubsub-js'
 
   export default {
     name: 'layout',
@@ -35,6 +37,15 @@
       Navbar,
       Sidebar,
     },
-    computed: {},
+    data() {
+      return {
+        isCollapse: store.config.getSidebarCollapse()
+      }
+    },
+    mounted() {
+      PubSub.subscribe(store.topics.TOGGLE_SIDEBAR_COLLAPSE, () => {
+        this.isCollapse = store.config.getSidebarCollapse()
+      })
+    }
   }
 </script>

@@ -26,17 +26,24 @@ const topics = {
   REMOVE_ROLE: 'REMOVE_ROLE',
   SET_RESOURCE: 'SET_RESOURCE',
   REMOVE_RESOURCE: 'REMOVE_RESOURCE',
+  TOGGLE_SIDEBAR_COLLAPSE: 'TOGGLE_SIDEBAR_COLLAPSE',
 }
 
 // 配置相关
 const config = {
   getSidebarCollapse() {
+    if (!store.get(configKey) || typeof store.get(configKey).sidebarCollapse === 'undefined') {
+      store.set(configKey, {
+        sidebarCollapse: false,
+      })
+    }
     return store.get(configKey).sidebarCollapse
   },
   toggleSidebarCollapse() {
     store.set(configKey, Object.assign(store.get(configKey), {
       sidebarCollapse: !store.get(configKey).sidebarCollapse
     }))
+    PubSub.publish(topics.TOGGLE_SIDEBAR_COLLAPSE)
   },
 }
 
@@ -112,9 +119,13 @@ const resource = {
 }
 
 // 初始化数据
-store.set(configKey, {
-  sidebarCollapse: false,
-})
+if (!store.get(configKey)) {
+  if (typeof store.get(configKey).sidebarCollapse === 'undefined') {
+    store.set(configKey, {
+      sidebarCollapse: false,
+    })
+  }
+}
 
 
 export default {
@@ -125,7 +136,7 @@ export default {
   role,
   resource,
   clear() {
-    store.remove(configKey)
+    // store.remove(configKey) // 不清除默认配置
     store.remove(tokenKey)
     store.remove(userKey)
     store.remove(roleKey)

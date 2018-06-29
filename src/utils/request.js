@@ -5,7 +5,7 @@
  */
 
 import axios from 'axios'
-import {Message, MessageBox} from 'element-ui'
+import {MessageBox, Notification} from 'element-ui'
 import store from './store'
 
 // 创建axios实例
@@ -58,10 +58,10 @@ request.interceptors.response.use(
           break;
 
         default:
-          Message({
+          Notification.error({
+            title: '消息',
             message: res.message,
-            type: 'error',
-            duration: 5 * 1000
+            duration: 0
           })
           break;
       }
@@ -73,10 +73,10 @@ request.interceptors.response.use(
   },
   error => {
     console.error(error)
-    Message({
+    Notification.error({
+      title: '消息',
       message: error.message,
-      type: 'error',
-      duration: 5 * 1000
+      duration: 0
     })
     return Promise.reject(error)
   }

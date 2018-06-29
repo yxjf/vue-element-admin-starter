@@ -3,8 +3,9 @@
     <el-menu
       mode="vertical"
       :show-timeout="200"
-      :default-active="$route.path"
+      :default-active="$route.name"
       :collapse="isCollapse"
+      @select="handleSelect"
       background-color="#4a5064"
       text-color="#fff"
       active-text-color="#00c1de"
@@ -17,7 +18,6 @@
 <script>
   import SidebarItem from '@/components/SidebarItem'
   import Resource from '@/resource'
-  import store from '@/utils/store'
 
   export default {
     name: 'Sidebar',
@@ -29,10 +29,17 @@
         menu: Resource.menu,
       }
     },
-    computed: {
-      isCollapse() {
-        return store.config.getSidebarCollapse()
+    props: {
+      isCollapse: {
+        type: Boolean,
+        default: false
       }
+    },
+    methods: {
+      // 导航菜单的点选处理
+      handleSelect(index) {
+        this.$router.push({name: index})
+      },
     }
   }
 </script>

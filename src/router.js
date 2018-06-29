@@ -7,7 +7,6 @@ import Router from 'vue-router'
 import NProgress from 'nprogress'
 import store from './utils/store'
 import Resource from './resource.js'
-import Layout from './views/layout'
 
 Vue.use(Router)
 
@@ -17,28 +16,12 @@ const routes = [
     path: '/login',
     component: () => import('@/views/login/index')
   },
-  {
-    name: 'welcome',
-    path: '/',
-    component: Layout,
-    redirect: '/welcome',
-    children: [{
-      path: 'welcome',
-      component: () => import('@/views/welcome/index'),
-      meta: {
-        title: '欢迎',
-        icon: 'fa fa-home',
-      },
-    }]
-  },
   ...Resource.menu,
   {
     path: '*',
     component: () => import('@/views/404')
   },
 ]
-
-console.log(routes);
 
 const router = new Router({
   mode: 'history',  // 路由模式

@@ -4,11 +4,30 @@
  * 用户可以访问的菜单、接口、特殊权限标记等统称为资源，每个资源有一个唯一的名称
  */
 
+// 页面布局框架
 import Layout from './views/layout'
+
+// 用于多级子菜单切换时内容显示
+import EmptyContainer from './components/EmptyContainer'
 
 // 菜单资源，用于生成路由和左侧菜单树
 // 菜单 name 命名方式为 x.x.x，对应 views 文件夹下的文件名，如 name: 'welcome.index' 对应 @views/welcome/index.vue 组件
 const menu = [
+  {
+    name: 'welcome',
+    path: '/',
+    component: Layout,
+    redirect: '/welcome',
+    children: [{
+      name: 'welcome.index',
+      path: 'welcome',
+      component: () => import('@/views/welcome/index'),
+      meta: {
+        title: '首页',
+        icon: 'fa fa-home',
+      },
+    }]
+  },
   {
     name: 'example1',
     path: '/example',
@@ -43,7 +62,7 @@ const menu = [
       {
         name: 'example.table2',
         path: 'table2',
-        component: () => import('@/views/example/table'),
+        component: EmptyContainer,
         meta: {
           title: '大列表',
           icon: 'fa fa-table',
@@ -59,8 +78,8 @@ const menu = [
             },
           },
           {
-            name: 'example.form.2',
-            path: 'form',
+            name: 'example.form2',
+            path: 'form2',
             component: () => import('@/views/example/form'),
             meta: {
               title: '表单',
@@ -81,40 +100,6 @@ const menu = [
     ]
   },
 ]
-
-
-// {
-//   path: '/',
-//     component: Layout,
-//   redirect: '/dashboard',
-//   name: 'Dashboard',
-//   hidden: true,
-//   children: [{
-//   path: 'dashboard',
-//   component: () => import('@/views/dashboard/index')
-// }]
-// },
-//
-// {
-//   path: '/example',
-//     component: Layout,
-//   redirect: '/example/table',
-//   name: 'Example',
-//   meta: { title: 'Example', icon: 'example' },
-//   children: [
-//     {
-//       path: 'table',
-//       name: 'Table',
-//       component: () => import('@/views/table/index'),
-//       meta: { title: 'Table', icon: 'table' }
-//     },
-//     {
-//       path: 'tree',
-//       name: 'Tree',
-//       component: () => import('@/views/tree/index'),
-//       meta: { title: 'Tree', icon: 'tree' }
-//     }
-//   ]
 
 export default {
   menu

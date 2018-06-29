@@ -6,6 +6,23 @@ body {
   color: #2c3e50;
 }
 
+// reset element default style
+.el-menu--popup {
+
+  i.fa {
+    color: #ffffff;
+    margin-right: 5px;
+    width: 22px;
+    text-align: center;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+}
+
+.el-notification__content {
+  text-align: left;
+}
+
 // login-container
 
 .login-container {
@@ -112,6 +129,29 @@ body {
     & > .el-container {
 
       & > .el-aside {
+        width: 220px !important;
+        background-color: #4a5064;
+        transition: width .28s;
+
+        &.collapse {
+          width: 64px !important;
+
+          .el-menu--collapse .el-submenu > .el-submenu__title > span {
+            height: 0;
+            width: 0;
+            overflow: hidden;
+            visibility: hidden;
+            display: inline-block;
+          }
+        }
+
+        // reset default transition
+        .horizontal-collapse-transition {
+          transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
+        }
+        .is-horizontal {
+          display: none;
+        }
 
         .el-scrollbar {
           border-right: solid 1px #e6e6e6;
@@ -120,7 +160,6 @@ body {
 
           .el-menu {
             border-right: 0;
-            padding-right: 10px;
 
             .el-menu-item, .el-submenu__title {
               height: 50px;
@@ -145,11 +184,61 @@ body {
           }
 
           .scrollbar-wrapper {
-            overflow: auto;
+            height: calc(~"100vh - 35px");
           }
         }
 
       }
+
+      & > .el-container {
+
+        & > .el-header {
+          padding: 0;
+
+          .toggle-sidebar {
+            float: left;
+            font-size: 20px;
+            line-height: 46px;
+            padding: 0 15px;
+            cursor: pointer;
+            outline: none;
+            transition: 0.28s;
+            transform: rotate(0deg);
+
+            &.collapse {
+              transform: rotate(-90deg);
+              transform-origin: 50% 50%;
+            }
+          }
+
+          .hamburger {
+            display: inline-block;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            transform: rotate(90deg);
+            transition: .38s;
+            transform-origin: 50% 50%;
+          }
+          .hamburger.is-active {
+            transform: rotate(0deg);
+          }
+
+          .el-breadcrumb {
+            display: inline-block;
+            font-size: 14px;
+            line-height: 46px;
+            margin-left: 10px;
+            outline: none;
+
+            .no-redirect {
+              color: #97a8be;
+              cursor: text;
+            }
+          }
+        }
+      }
+
     }
   }
 }

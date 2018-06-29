@@ -3,7 +3,7 @@
     <template v-for="item in menu" v-if="item.children && !item.hidden">
       <!--只有一个子元素的菜单资源直接单独显示-->
       <el-menu-item v-if="item.children.length === 1"
-                    :index="item.name" :key="item.name"
+                    :index="item.children[0].name" :key="item.children[0].name"
                     :class="{'submenu-title-noDropdown':!isNest}">
         <i :class="[ item.children[0].meta.icon || 'fa fa-navicon']"></i>
         <span slot="title">{{item.children[0].meta.title}}</span>
@@ -39,9 +39,6 @@
 <script>
   export default {
     name: 'SidebarItem',
-    mounted() {
-      console.log(this.menu);
-    },
     props: {
       menu: {
         type: Array
