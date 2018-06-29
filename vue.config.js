@@ -15,9 +15,18 @@ module.exports = {
           data: {
             token: '123',
             user: {
-              id: '1'
+              id: '1',
+              userName: 'admin',
+              displayName: '管理员',
             }
           },
+          message: '',
+          status: 0,
+        });
+      });
+      app.post('/api/user/logout', function (req, res) {
+        res.json({
+          data: {},
           message: '',
           status: 0,
         });

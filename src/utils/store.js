@@ -10,6 +10,7 @@ import store from 'store'
 import PubSub from 'pubsub-js'
 
 const storeKeyPrefix = 'vue-admin-starter-'  // 自定义存储变量前缀
+const configKey = storeKeyPrefix + 'config'  // 配置
 const tokenKey = storeKeyPrefix + 'token'  // token
 const userKey = storeKeyPrefix + 'user'  // 用户信息
 const roleKey = storeKeyPrefix + 'role'  // 角色信息
@@ -25,6 +26,18 @@ const topics = {
   REMOVE_ROLE: 'REMOVE_ROLE',
   SET_RESOURCE: 'SET_RESOURCE',
   REMOVE_RESOURCE: 'REMOVE_RESOURCE',
+}
+
+// 配置相关
+const config = {
+  getSidebarCollapse() {
+    return store.get(configKey).sidebarCollapse
+  },
+  toggleSidebarCollapse() {
+    store.set(configKey, Object.assign(store.get(configKey), {
+      sidebarCollapse: !store.get(configKey).sidebarCollapse
+    }))
+  },
 }
 
 // token 相关
@@ -50,6 +63,12 @@ const userInfo = {
   },
   getId() {
     return store.get(userKey) ? (store.get(userKey).id || '') : ''
+  },
+  getUserName() {
+    return store.get(userKey) ? (store.get(userKey).userName || '') : ''
+  },
+  getDisplayName() {
+    return store.get(userKey) ? (store.get(userKey).displayName || '') : ''
   },
   set(userInfo) {
     store.set(userKey, userInfo)
@@ -92,14 +111,24 @@ const resource = {
   },
 }
 
+// 初始化数据
+store.set(configKey, {
+  sidebarCollapse: false,
+})
+
 
 export default {
   topics,
+  config,
   token,
   userInfo,
   role,
   resource,
   clear() {
-    store.clearAll()
+    store.remove(configKey)
+    store.remove(tokenKey)
+    store.remove(userKey)
+    store.remove(roleKey)
+    store.remove(resourceKey)
   },
 }

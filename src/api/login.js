@@ -27,6 +27,6 @@ export function logout() {
     url: '/user/logout',
     method: 'post'
   }).then(() => {
-    store.clearAll()
+    store.clear()
   })
 }

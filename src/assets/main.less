@@ -61,3 +61,95 @@ body {
   }
 
 }
+
+// layout
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+
+  & > .el-container {
+    height: 100vh;
+    overflow: hidden;
+
+    & > .el-header {
+      padding: 0;
+      height: 50px !important;
+      line-height: 50px;
+      color: #fff;
+      background-color: #373d41;
+
+      & > div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .brand {
+        padding-left: 15px;
+
+        h2 {
+          margin: 0;
+          padding: 0;
+          font-size: 18px;
+          font-weight: 400;
+        }
+      }
+
+      .el-dropdown {
+
+        .el-dropdown-link {
+          padding: 0 15px;
+          cursor: pointer;
+          color: #fff;
+
+          &:hover, &:focus {
+            background-color: rgba(31, 45, 61, 0.4);
+          }
+        }
+      }
+    }
+
+    & > .el-container {
+
+      & > .el-aside {
+
+        .el-scrollbar {
+          border-right: solid 1px #e6e6e6;
+          height: calc(~"100vh - 50px");
+          background-color: #4a5064;
+
+          .el-menu {
+            border-right: 0;
+            padding-right: 10px;
+
+            .el-menu-item, .el-submenu__title {
+              height: 50px;
+              line-height: 50px;
+            }
+
+            i.fa {
+              color: #ffffff;
+              margin-right: 5px;
+              width: 22px;
+              text-align: center;
+              font-size: 14px;
+              vertical-align: middle;
+            }
+
+            .el-menu-item.is-active {
+              background-color: #5a6179 !important;
+              i.fa {
+                color: #00c1de;
+              }
+            }
+          }
+
+          .scrollbar-wrapper {
+            overflow: auto;
+          }
+        }
+
+      }
+    }
+  }
+}

@@ -7,20 +7,9 @@ import Router from 'vue-router'
 import NProgress from 'nprogress'
 import store from './utils/store'
 import Resource from './resource.js'
+import Layout from './views/layout'
 
 Vue.use(Router)
-
-// 根据资源动态生成路由
-let dynamicRouter = []
-
-for (let m of Resource.menu) {
-  let componentPath = m.name.split('.').join('/')
-  dynamicRouter.push({
-    name: m.name,
-    path: m.path,
-    component: () => import(`@/views/${componentPath}`),
-  })
-}
 
 const routes = [
   {
@@ -29,10 +18,20 @@ const routes = [
     component: () => import('@/views/login/index')
   },
   {
+    name: 'welcome',
     path: '/',
-    redirect: '/welcome',  // 默认跳转到欢迎页
+    component: Layout,
+    redirect: '/welcome',
+    children: [{
+      path: 'welcome',
+      component: () => import('@/views/welcome/index'),
+      meta: {
+        title: '欢迎',
+        icon: 'fa fa-home',
+      },
+    }]
   },
-  ...dynamicRouter,
+  ...Resource.menu,
   {
     path: '*',
     component: () => import('@/views/404')
@@ -53,8 +52,7 @@ const whiteList = ['/login']
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
-  console.log(to);
-  console.log(from);
+  document.title = to.meta.title
   // 如果存在 token
   if (store.token.get()) {
     if (to.path === '/login') {

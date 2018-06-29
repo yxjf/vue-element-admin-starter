@@ -13,9 +13,6 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/zh-CN' // 语言文件
 
-// 引入 fontawesome 图标库 https://fontawesome.com
-import '@fortawesome/fontawesome-free/css/all.css'
-
 // 进度条样式
 import 'nprogress/nprogress.css'
 
