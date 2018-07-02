@@ -14,6 +14,21 @@ import EmptyContainer from '@/components/EmptyContainer'
 // 菜单 name 命名方式为 x.x.x，对应 views 文件夹下的文件名，如 name: 'welcome.index' 对应 @views/welcome/index.vue 组件
 const menu = [
   {
+    name: 'welcome',
+    path: '/',
+    component: Layout,
+    redirect: '/welcome',
+    children: [{
+      name: 'welcome.index',
+      path: 'welcome',
+      component: () => import('@/views/welcome/index'),
+      meta: {
+        title: '首页',
+        icon: 'fa fa-home',
+      },
+    }]
+  },
+  {
     name: 'example',
     path: '/example',
     component: Layout,
@@ -53,6 +68,7 @@ const menu = [
       {
         name: 'example.component',
         path: 'component',
+        redirect: '/example/component/codeEditor',
         component: EmptyContainer,
         meta: {
           title: '特殊组件',

@@ -5,9 +5,13 @@
  */
 
 import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 import {MessageBox, Notification} from 'element-ui'
 import store from './store'
 import permission from './permission'
+import config from '@/config'
+import generateMock from './mock'
+import api from '@/resources/api'
 
 // https://github.com/axios/axios#cancellation
 const CancelToken = axios.CancelToken;
@@ -20,10 +24,15 @@ const request = axios.create({
   cancelToken: source.token,
 })
 
+// 接口白名单
+const whiteList = [
+  api.login,
+]
+
 // request 拦截器，在每个请求之前执行
 request.interceptors.request.use(config => {
   // 判断是否有接口资源访问权限
-  if (!permission.isAuthApi(config.url)) {
+  if (!permission.isAuthApi(config.url) && whiteList.indexOf(config.url) < 0) {
     source.cancel(`没有 ${config.url} 接口访问权限`);
   }
 
@@ -54,7 +63,6 @@ request.interceptors.response.use(
      */
     const res = response.data
     if (res.status !== 0) {
-
       switch (res.status) {
         // 40001 token过期或非法
         case 40001:
@@ -72,14 +80,13 @@ request.interceptors.response.use(
           Notification.error({
             title: '错误',
             message: res.message,
-            duration: 0
+            duration: 10000
           })
           break;
       }
 
       return Promise.reject('error')
     }
-
     return res.data
   },
   error => {
@@ -87,10 +94,18 @@ request.interceptors.response.use(
     Notification.error({
       title: '错误',
       message: error.message,
-      duration: 0
+      duration: 10000
     })
     return Promise.reject(error)
   }
 )
+
+// mock
+if (config.mockEnabled) {
+  let mock = new MockAdapter(request, {
+    delayResponse: 500, // 模拟延迟响应
+  });
+  generateMock(mock)
+}
 
 export default request

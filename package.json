@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.4.2",
+    "lodash": "^4.17.10",
     "normalize.css": "^8.0.0",
     "nprogress": "^0.2.0",
     "pubsub-js": "^1.6.0",
@@ -23,6 +24,7 @@
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-service": "^3.0.0-beta.15",
+    "axios-mock-adapter": "^1.15.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16"

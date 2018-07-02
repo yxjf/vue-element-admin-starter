@@ -24,7 +24,7 @@
       <el-form-item>
         <el-button type="danger"
                    class="submit"
-                   :loading="loading"
+                   :loading="loginPending"
                    @click.native.prevent="handleLogin">
           登 录
         </el-button>
@@ -36,7 +36,6 @@
 <script>
   import validate from '@/utils/validate'
   import * as api from '@/api/login'
-  import permission from '@/utils/permission'
 
   export default {
     name: 'login',
@@ -50,7 +49,7 @@
           username: [validate.username()],
           password: [validate.password()],
         },
-        loading: false,
+        loginPending: false,
         showPwd: false,
       }
     },
@@ -61,11 +60,11 @@
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
           if (valid) {
-            this.loading = true
+            this.loginPending = true
             api.login(this.loginForm.username, this.loginForm.password).then(() => {
               this.$router.push({path: '/'})
             }).finally(() => {
-              this.loading = false
+              this.loginPending = false
             })
           }
           return false

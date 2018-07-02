@@ -6,8 +6,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import NProgress from 'nprogress'
 import store from '@/utils/store'
+import permission from '@/utils/permission'
 import menu from '@/resources/menu'
-import Layout from '@/views/layout'
 
 Vue.use(Router)
 
@@ -15,27 +15,17 @@ const routes = [
   {
     name: 'login.index',
     path: '/login',
+    meta: {
+      title: '登录',
+    },
     component: () => import('@/views/login/index')
-  },
-  // 首页不设权限，都能访问
-  {
-    name: 'welcome',
-    path: '/',
-    component: Layout,
-    redirect: '/welcome',
-    children: [{
-      name: 'welcome.index',
-      path: 'welcome',
-      component: () => import('@/views/welcome/index'),
-      meta: {
-        title: '首页',
-        icon: 'fa fa-home',
-      },
-    }]
   },
   ...menu,
   {
     path: '*',
+    meta: {
+      title: '404',
+    },
     component: () => import('@/views/404')
   },
 ]
@@ -49,13 +39,15 @@ const router = new Router({
 // 路由跳转前进行身份认证
 
 // 白名单，不会重定向
-const whiteList = ['/login']
+const whiteList = [
+  '/login',
+]
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
   document.title = to.meta.title
   // 如果存在 token
-  if (store.token.get()) {
+  if (store.token.get() && permission.isAuthMenu(to.name)) {
     if (to.path === '/login') {
       next({path: '/'})
       NProgress.done()
