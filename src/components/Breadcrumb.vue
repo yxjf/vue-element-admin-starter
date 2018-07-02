@@ -1,11 +1,15 @@
 <template>
-  <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.name">
-        <span v-if="item.redirect==='noredirect' || index==levelList.length-1"
-              class="no-redirect">{{item.meta.title || item.name}}</span>
-      <router-link v-else :to="{name:item.name}">{{item.meta.title || item.name}}</router-link>
-    </el-breadcrumb-item>
-  </el-breadcrumb>
+  <div>
+    <div class="title">{{ levelList[levelList.length - 1].meta.title || '' }}</div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.name">
+        <span v-if="item.redirect==='noredirect' || index == levelList.length - 1"
+              class="no-redirect"
+              :class="{ current : index == levelList.length - 1}">{{item.meta.title || item.name}}</span>
+        <router-link v-else :to="{name:item.name}">{{item.meta.title || item.name}}</router-link>
+      </el-breadcrumb-item>
+    </el-breadcrumb>
+  </div>
 </template>
 
 <script>

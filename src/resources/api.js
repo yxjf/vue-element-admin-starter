@@ -8,6 +8,7 @@
 const api = {
   login: '/user/login',
   logout: '/user/logout',
+  example_bigTable: '/example/bigTable',
 }
 
 export default api

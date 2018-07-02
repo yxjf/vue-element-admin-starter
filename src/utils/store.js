@@ -8,6 +8,7 @@
 
 import store from 'store'
 import PubSub from 'pubsub-js'
+import topic from './topic'
 
 const storeKeyPrefix = 'vue-admin-starter-'  // 自定义存储变量前缀
 const configKey = storeKeyPrefix + 'config'  // 配置
@@ -16,18 +17,6 @@ const userKey = storeKeyPrefix + 'user'  // 用户信息
 const roleKey = storeKeyPrefix + 'role'  // 角色信息
 const resourceKey = storeKeyPrefix + 'resource'  // 资源信息
 
-// PubSub 事件 topic
-const topics = {
-  SET_TOKEN: 'SET_TOKEN',
-  REMOVE_TOKEN: 'REMOVE_TOKEN',
-  SET_USERINFO: 'SET_USERINFO',
-  REMOVE_USERINFO: 'REMOVE_USERINFO',
-  SET_ROLE: 'SET_ROLE',
-  REMOVE_ROLE: 'REMOVE_ROLE',
-  SET_RESOURCE: 'SET_RESOURCE',
-  REMOVE_RESOURCE: 'REMOVE_RESOURCE',
-  TOGGLE_SIDEBAR_COLLAPSE: 'TOGGLE_SIDEBAR_COLLAPSE',
-}
 
 // 配置相关
 const config = {
@@ -43,7 +32,7 @@ const config = {
     store.set(configKey, Object.assign(store.get(configKey), {
       sidebarCollapse: !store.get(configKey).sidebarCollapse
     }))
-    PubSub.publish(topics.TOGGLE_SIDEBAR_COLLAPSE)
+    PubSub.publish(topic.TOGGLE_SIDEBAR_COLLAPSE)
   },
 }
 
@@ -55,11 +44,11 @@ const token = {
   },
   set(token) {
     store.set(tokenKey, token)
-    PubSub.publish(topics.SET_TOKEN, token)
+    PubSub.publish(topic.SET_TOKEN, token)
   },
   remove() {
     store.remove(tokenKey)
-    PubSub.publish(topics.REMOVE_TOKEN)
+    PubSub.publish(topic.REMOVE_TOKEN)
   },
 }
 
@@ -79,11 +68,11 @@ const userInfo = {
   },
   set(userInfo) {
     store.set(userKey, userInfo)
-    PubSub.publish(topics.SET_USERINFO, userInfo)
+    PubSub.publish(topic.SET_USERINFO, userInfo)
   },
   remove() {
     store.remove(userKey)
-    PubSub.publish(topics.REMOVE_USERINFO)
+    PubSub.publish(topic.REMOVE_USERINFO)
   },
 }
 
@@ -96,11 +85,11 @@ const role = {
   },
   set(role) {
     store.set(roleKey, role)
-    PubSub.publish(topics.SET_ROLE, role)
+    PubSub.publish(topic.SET_ROLE, role)
   },
   remove() {
     store.remove(roleKey)
-    PubSub.publish(topics.REMOVE_ROLE)
+    PubSub.publish(topic.REMOVE_ROLE)
   },
 }
 
@@ -123,11 +112,11 @@ const resource = {
   },
   set(resource) {
     store.set(resourceKey, resource)
-    PubSub.publish(topics.SET_RESOURCE, resource)
+    PubSub.publish(topic.SET_RESOURCE, resource)
   },
   remove() {
     store.remove(resourceKey)
-    PubSub.publish(topics.REMOVE_RESOURCE)
+    PubSub.publish(topic.REMOVE_RESOURCE)
   },
 }
 
@@ -142,7 +131,7 @@ if (!store.get(configKey)) {
 
 
 export default {
-  topics,
+  topic,
   config,
   token,
   userInfo,

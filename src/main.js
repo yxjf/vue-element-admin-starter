@@ -26,6 +26,9 @@ import router from './router'
 // 引入权限
 import '@/utils/permission'
 
+// 引入filter
+import '@/utils/filter'
+
 Vue.use(ElementUI, {locale})
 
 // 设置为 false 以阻止 vue 在启动时生成生产提示

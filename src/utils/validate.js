@@ -3,6 +3,17 @@
  */
 
 export default {
+  // 通用校验规则
+  required(message = '此字段必须填写', required = true) {
+    return {
+      required,
+      trigger: 'blur',
+      message,
+    }
+  },
+
+  // 个性化校验规则
+
   // 用户名验证规则
   username(required = true) {
     return {
