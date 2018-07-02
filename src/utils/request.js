@@ -7,15 +7,26 @@
 import axios from 'axios'
 import {MessageBox, Notification} from 'element-ui'
 import store from './store'
+import permission from './permission'
+
+// https://github.com/axios/axios#cancellation
+const CancelToken = axios.CancelToken;
+const source = CancelToken.source();
 
 // 创建axios实例
 const request = axios.create({
   baseURL: '/api', // api的base_url
   timeout: 10000, // 请求超时时间 ms
+  cancelToken: source.token,
 })
 
 // request 拦截器，在每个请求之前执行
 request.interceptors.request.use(config => {
+  // 判断是否有接口资源访问权限
+  if (!permission.isAuthApi(config.url)) {
+    source.cancel(`没有 ${config.url} 接口访问权限`);
+  }
+
   // 每个请求都添加自定义的header，根据实际情况修改
   config.headers['Content-Type'] = 'application/json'  // 默认和后端交互均使用json
   config.headers['X-UserId'] = store.userInfo.getId()
@@ -59,7 +70,7 @@ request.interceptors.response.use(
 
         default:
           Notification.error({
-            title: '消息',
+            title: '错误',
             message: res.message,
             duration: 0
           })
@@ -74,7 +85,7 @@ request.interceptors.response.use(
   error => {
     console.error(error)
     Notification.error({
-      title: '消息',
+      title: '错误',
       message: error.message,
       duration: 0
     })

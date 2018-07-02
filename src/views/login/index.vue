@@ -36,6 +36,7 @@
 <script>
   import validate from '@/utils/validate'
   import * as api from '@/api/login'
+  import permission from '@/utils/permission'
 
   export default {
     name: 'login',
@@ -52,6 +53,9 @@
         loading: false,
         showPwd: false,
       }
+    },
+    mounted() {
+
     },
     methods: {
       handleLogin() {

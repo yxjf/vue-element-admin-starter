@@ -23,14 +23,13 @@ import './assets/main.less'
 import App from './App.vue'
 import router from './router'
 
+// 引入权限
+import '@/utils/permission'
+
 Vue.use(ElementUI, {locale})
 
 // 设置为 false 以阻止 vue 在启动时生成生产提示
 Vue.config.productionTip = false
-
-// 是否包含角色和权限
-// 如果不需要角色和权限功能，可以设置为 false
-Vue.config.needPermission = false
 
 new Vue({
   router,

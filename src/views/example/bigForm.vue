@@ -1,11 +1,11 @@
 <template>
   <div>
-    table
+    bigForm
   </div>
 </template>
 
 <script>
   export default {
-    name: 'table'
+    name: 'bigForm'
   }
 </script>

@@ -16,11 +16,9 @@ export function login(username, password) {
       password
     }
   }).then(data => {
-    // 设置 token、userInfo和权限信息，可以根据返回格式自行修改
+    // 设置 token 和 userInfo，可以根据返回格式自行修改
     store.token.set(data.token)
-    store.userInfo.set(data.userInfo)
-    store.role.set(data.role)
-    store.resource.set(data.resource)
+    store.userInfo.set(data.user)
   })
 }
 

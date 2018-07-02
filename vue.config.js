@@ -14,11 +14,21 @@ module.exports = {
         res.json({
           data: {
             token: '123',
-            user: {
+            userInfo: {
               id: '1',
               userName: 'admin',
               displayName: '管理员',
-            }
+            },
+            role: ['系统管理员', '业务员'],
+            resource: [
+              {type: 'menu', name: 'example1'},
+              {type: 'menu', name: 'example.table1'},
+              {type: 'menu', name: 'example'},
+              {type: 'menu', name: 'example.table2'},
+              {type: 'menu', name: 'example.form2'},
+              {type: 'api', name: '/user/login'},
+              {type: 'api', name: '/user/logout'},
+            ]
           },
           message: '',
           status: 0,

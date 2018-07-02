@@ -88,9 +88,11 @@ const userInfo = {
 }
 
 // 角色信息
+// 角色格式:
+// ['admin', 'manager', ... ]
 const role = {
   get() {
-    return store.get(roleKey)
+    return store.get(roleKey) || []
   },
   set(role) {
     store.set(roleKey, role)
@@ -104,9 +106,20 @@ const role = {
 
 // 资源信息
 // 用户可以访问的菜单、接口、特殊权限标记等统称为资源，每个资源有一个唯一的名称
+// 资源格式：
+// [{type: 'menu/api/action', name:'...(menuName/apiUrl/actionName)' }, ...]
 const resource = {
   get() {
-    return store.get(resourceKey)
+    return store.get(resourceKey) || []
+  },
+  getMenu() {
+    return (store.get(resourceKey) ? store.get(resourceKey).filter(d => d.type === 'menu') : []).map(d => d.name)
+  },
+  getApi() {
+    return (store.get(resourceKey) ? store.get(resourceKey).filter(d => d.type === 'api') : []).map(d => d.name)
+  },
+  getAction() {
+    return (store.get(resourceKey) ? store.get(resourceKey).filter(d => d.type === 'action') : []).map(d => d.name)
   },
   set(resource) {
     store.set(resourceKey, resource)

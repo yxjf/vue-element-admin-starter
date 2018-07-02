@@ -1,11 +1,11 @@
 <template>
   <div>
-    form
+    tabPage
   </div>
 </template>
 
 <script>
   export default {
-    name: 'form'
+    name: 'tabPage'
   }
 </script>

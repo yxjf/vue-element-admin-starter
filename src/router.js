@@ -5,8 +5,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import NProgress from 'nprogress'
-import store from './utils/store'
-import Resource from './resource.js'
+import store from '@/utils/store'
+import menu from '@/resources/menu'
+import Layout from '@/views/layout'
 
 Vue.use(Router)
 
@@ -16,7 +17,23 @@ const routes = [
     path: '/login',
     component: () => import('@/views/login/index')
   },
-  ...Resource.menu,
+  // 首页不设权限，都能访问
+  {
+    name: 'welcome',
+    path: '/',
+    component: Layout,
+    redirect: '/welcome',
+    children: [{
+      name: 'welcome.index',
+      path: 'welcome',
+      component: () => import('@/views/welcome/index'),
+      meta: {
+        title: '首页',
+        icon: 'fa fa-home',
+      },
+    }]
+  },
+  ...menu,
   {
     path: '*',
     component: () => import('@/views/404')
@@ -25,6 +42,7 @@ const routes = [
 
 const router = new Router({
   mode: 'history',  // 路由模式
+  scrollBehavior: () => ({y: 0}),
   routes,
 })
 

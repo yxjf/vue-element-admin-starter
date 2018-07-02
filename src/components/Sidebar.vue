@@ -17,7 +17,7 @@
 
 <script>
   import SidebarItem from '@/components/SidebarItem'
-  import Resource from '@/resource'
+  import permission from '@/utils/permission'
 
   export default {
     name: 'Sidebar',
@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        menu: Resource.menu,
+        menu: permission.filteredMenu(),  // 只显示授权访问的菜单
       }
     },
     props: {
