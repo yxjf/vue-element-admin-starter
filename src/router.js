@@ -32,7 +32,7 @@ const routes = [
 
 const router = new Router({
   mode: 'history',  // 路由模式
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({x: 0, y: 0}),
   routes,
 })
 
@@ -49,6 +49,7 @@ router.beforeEach((to, from, next) => {
   // 如果存在 token
   if (store.token.get() && permission.isAuthMenu(to.name)) {
     if (to.path === '/login') {
+      // 跳过登录
       next({path: '/'})
       NProgress.done()
     } else {

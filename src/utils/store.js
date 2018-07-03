@@ -29,7 +29,7 @@ const config = {
     return store.get(configKey).sidebarCollapse
   },
   toggleSidebarCollapse() {
-    store.set(configKey, Object.assign(store.get(configKey), {
+    store.set(configKey, Object.assign(store.get(configKey) || {}, {
       sidebarCollapse: !store.get(configKey).sidebarCollapse
     }))
     PubSub.publish(topic.TOGGLE_SIDEBAR_COLLAPSE)
@@ -121,12 +121,10 @@ const resource = {
 }
 
 // 初始化数据
-if (!store.get(configKey)) {
-  if (typeof store.get(configKey).sidebarCollapse === 'undefined') {
-    store.set(configKey, {
-      sidebarCollapse: false,
-    })
-  }
+if (!store.get(configKey) || typeof store.get(configKey).sidebarCollapse === 'undefined') {
+  store.set(configKey, {
+    sidebarCollapse: false,
+  })
 }
 
 
