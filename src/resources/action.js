@@ -8,7 +8,8 @@
 
 // 接口资源
 const action = {
-  'example.addUser': '示例-新建用户',
+  // 示例-新建用户
+  exampleAddUser: 'example.bigTable.addUser',
 
 }
 

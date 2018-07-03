@@ -30,6 +30,7 @@ export default function (mock) {
         {type: 'api', name: '/user/login'},
         {type: 'api', name: '/user/logout'},
         {type: 'api', name: '/example/bigTable'},
+        {type: 'action', name: 'example.bigTable.addUser'},
       ]
     },
     message: '',

@@ -8,10 +8,15 @@ dependencies:
 
 - [vue](https://github.com/vuejs/vue) javascript framework
 - [vue-router](https://github.com/vuejs/vue-router) official router for Vue.js
-- [axios](https://github.com/axios/axios) ajax request
+- [axios](https://github.com/axios/axios) ajax requestor
+- [lodash](https://github.com/lodash/lodash) utility library
+- [moment](https://momentjs.com/) dates and times library
+- [pubsub-js](https://github.com/mroderick/PubSubJS) publish/subscribe
+- [store](https://github.com/marcuswestin/store.js) cross-browser storage
 - [normalize.css](https://github.com/necolas/normalize.css) CSS reset
 - [element-ui](https://github.com/ElemeFE/element) UI framework
 - [nprogress](https://github.com/rstacruz/nprogress) slim progress bar
+- [brace](https://github.com/thlorenz/brace) browserify compatible version of the ace editor
 
 ## Build Setup
 
@@ -30,6 +35,7 @@ yarn build
 
 
 ```
+
 
 ## License
 

@@ -12,6 +12,10 @@
           <el-form-item>
             <el-button type="primary" size="small" @click="onQuery">查询</el-button>
           </el-form-item>
+          <el-form-item>
+            <!--注意这里判断action的方式-->
+            <el-button type="success" size="small" v-show="isAuthAction(action.exampleAddUser)">新建用户</el-button>
+          </el-form-item>
         </el-form>
       </div>
       <template slot="columns">
@@ -43,6 +47,7 @@
 
 <script>
   import api from '@/resources/api'
+  import action from '@/resources/action'
   import DataTable from '@/components/DataTable'
   import event from '@/utils/event'
 
@@ -53,6 +58,7 @@
     },
     data() {
       return {
+        action,
         apiUrl: api.example_bigTable,
         queryParams: {
           keyword: ''
