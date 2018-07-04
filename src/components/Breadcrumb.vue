@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="title">{{ levelList[levelList.length - 1].meta.title || '' }}</div>
+    <div id="loading-container"></div>
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.name">
         <span v-if="item.redirect==='noredirect' || index == levelList.length - 1"
@@ -14,6 +15,7 @@
 
 <script>
   export default {
+    name: 'Breadcrumb',
     created() {
       this.getBreadcrumb()
     },

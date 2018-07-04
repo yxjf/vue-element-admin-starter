@@ -11,6 +11,13 @@ export default {
       message,
     }
   },
+  requiredForSelect(message = '此字段必须选择', required = true) {
+    return {
+      required,
+      trigger: 'change',
+      message,
+    }
+  },
 
   // 个性化校验规则
 

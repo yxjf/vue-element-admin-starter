@@ -6,7 +6,7 @@
 
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import {MessageBox, Notification} from 'element-ui'
+import {MessageBox, Notification, Loading} from 'element-ui'
 import store from './store'
 import permission from './permission'
 import config from '@/config'
@@ -29,12 +29,19 @@ const whiteList = [
   api.login,
 ]
 
+let loadingInstance;
+
 // request 拦截器，在每个请求之前执行
 request.interceptors.request.use(config => {
   // 判断是否有接口资源访问权限
   if (!permission.isAuthApi(config.url) && whiteList.indexOf(config.url) < 0) {
     source.cancel(`没有 ${config.url} 接口访问权限`);
   }
+
+  // 请求载入框
+  loadingInstance = Loading.service({
+    target: '#loading-container',
+  });
 
   // 每个请求都添加自定义的header，根据实际情况修改
   config.headers['Content-Type'] = 'application/json'  // 默认和后端交互均使用json
@@ -43,6 +50,7 @@ request.interceptors.request.use(config => {
 
   return config
 }, error => {
+  loadingInstance.close()
   console.error(error)
   return Promise.reject(error)
 })
@@ -50,6 +58,8 @@ request.interceptors.request.use(config => {
 // response 拦截器，在每个请求返回之后执行
 request.interceptors.response.use(
   response => {
+
+    loadingInstance.close()
 
     /**
      * 这里约定的返回值格式为：
@@ -90,6 +100,7 @@ request.interceptors.response.use(
     return res.data
   },
   error => {
+    loadingInstance.close()
     console.error(error)
     Notification.error({
       title: '错误',

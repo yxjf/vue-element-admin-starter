@@ -9,6 +9,11 @@ const api = {
   login: '/user/login',
   logout: '/user/logout',
   example_bigTable: '/example/bigTable',
+  sample_list: '/sample_list',
+  sample_create: '/sample_create',
+  sample_update: '/sample_update',
+  sample_detail: '/sample_detail',
+  sample_delete: '/sample_delete',
 }
 
 export default api

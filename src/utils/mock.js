@@ -37,7 +37,7 @@ export default function (mock) {
     status: 0,
   });
 
-  mock.onPost('/example/bigTable').reply((config) => {
+  mock.onPost(/(\/example\/bigTable)|(\/sample_list)/).reply((config) => {
     let params = JSON.parse(config.data)
     let list = []
     const total = 500
@@ -46,11 +46,13 @@ export default function (mock) {
       list.push({
         id: i + ~~(Math.random() * 12345),
         title: lorem.substr(0, Math.max(10, ~~(Math.random() * 50))),
+        description: lorem.substr(0, Math.max(100, ~~(Math.random() * 300))),
         status: Math.random() * 2 > 1 ? 1 : 0,
-        date: +new Date
+        date: +new Date,
+        amount: ~~(Math.random() * 1000000),
       })
     }
-    console.log(params);
+    console.log('do search mock: %s', JSON.stringify(params))
 
     return [200, {
       data: {
@@ -61,6 +63,37 @@ export default function (mock) {
       status: 0,
     }]
   });
+
+  mock.onPost('/sample_detail').reply((config) => {
+    let params = JSON.parse(config.data)
+
+    console.log(params);
+    return [200, {
+      data: {
+        id: params.id,
+        title: lorem.substr(0, Math.max(10, ~~(Math.random() * 50))),
+        description: lorem.substr(0, Math.max(100, ~~(Math.random() * 300))),
+        status: Math.random() * 2 > 1 ? 1 : 0,
+        date: +new Date,
+        amount: ~~(Math.random() * 1000000),
+      },
+      message: '',
+      status: 0,
+    }]
+
+  })
+
+  mock.onPost(/\/sample_(create|update|delete)/).reply((config) => {
+    let params = JSON.parse(config.data)
+
+    console.log(params);
+    return [200, {
+      data: '',
+      message: '',
+      status: 0,
+    }]
+
+  })
 
   mock.onAny().reply(200, {
     data: '',

@@ -28,11 +28,16 @@
   import event from '@/utils/event'
 
   export default {
-    name: 'TabPage',
+    name: 'TabContainer',
     props: {
       // 默认开启页
       defaultPage: {
         type: Object
+      },
+      // tab 新建时触发
+      tabCreate: {
+        type: Function,
+        required: false
       },
       // tab 被选中时触发
       tabClick: {
@@ -56,19 +61,33 @@
       }
     },
     mounted() {
-      this.$on(event.OPEN_TAB, (tabPage) => {
-        this.openTabPage(tabPage);
+      this.$on(event.OPEN_TAB, (tabPage, cb) => {
+        this.openTabPage(tabPage, cb)
+      });
+      this.$on(event.CLOSE_TAB, (tabPageName, cb) => {
+        this.handleRemove(tabPageName, cb)
+      });
+      this.$on(event.ACTIVE_TAB, (tabPageName, cb) => {
+        this.activeName = tabPageName
+
+        if (cb && typeof cb === 'function') {
+          cb(this.activeName)
+        }
       });
     },
     methods: {
       // 关闭页面
-      handleRemove(targetName) {
+      handleRemove(targetName, cb) {
         const tabs = this.pages.filter((tab) => {
           return tab.name !== targetName
         })
         this.pages = tabs
         // 设置关闭后默认打开的标签页
         this.activeName = tabs.length > 0 ? tabs[tabs.length - 1].name : this.defaultPage.name
+
+        if (cb && typeof cb === 'function') {
+          cb(this.activeName)
+        }
 
         if (this.tabRemove) {
           this.tabRemove(targetName)
@@ -81,13 +100,21 @@
         }
       },
       // 打开新页面
-      openTabPage(tabPage) {
+      openTabPage(tabPage, cb) {
         // 先关闭存在的同名的，再打开
         if (this.pages.some(item => item.name === tabPage.name)) {
           this.handleRemove(tabPage.name);
         }
         this.pages.push(tabPage);
         this.activeName = tabPage.name;
+
+        if (cb && typeof cb === 'function') {
+          cb(this.activeName)
+        }
+
+        if (this.tabCreate) {
+          this.tabCreate(tabPage)
+        }
       },
     }
   }

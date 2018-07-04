@@ -1,4 +1,13 @@
 module.exports = {
+  chainWebpack: config => {
+    config
+      .plugin('html')
+      .tap(args => {
+        // 防止 Cyclic dependency 错误
+        args[0].chunksSortMode = 'none'
+        return args
+      })
+  },
   devServer: {
     // mock
     // 在这里定义mock需要重启server，改为在 utils/mock 中定义

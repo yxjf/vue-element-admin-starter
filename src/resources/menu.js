@@ -20,6 +20,10 @@ const menu = [
     path: '/',
     component: Layout,
     redirect: '/welcome',
+    meta: {
+      title: '首页',
+      icon: 'fa fa-home',
+    },
     children: [{
       name: 'welcome.index',
       path: 'welcome',
@@ -87,6 +91,45 @@ const menu = [
             },
           },
         ]
+      }
+    ]
+  },
+  {
+    name: 'generator',
+    path: '/generator',
+    component: Layout,
+    redirect: '/generator/index',
+    meta: {
+      title: '代码生成',
+      icon: 'fa fa-file-code-o',
+    },
+    children: [
+      {
+        name: 'generator.index',
+        path: 'index',
+        component: () => import('@/views/generator/index'),
+        meta: {
+          title: '代码生成器',
+          icon: 'fa fa-file-code-o',
+        },
+      },
+      {
+        name: 'generator.sample',
+        path: 'sample',
+        component: () => import('@/views/generator/sample'),
+        meta: {
+          title: '代码生成样例',
+          icon: 'fa fa-file-o',
+        },
+      },
+      {
+        name: 'generator.test',
+        path: 'test',
+        component: () => import('@/views/generator/test'),
+        meta: {
+          title: '测试生成代码',
+          icon: 'fa fa-flask',
+        },
       }
     ]
   },

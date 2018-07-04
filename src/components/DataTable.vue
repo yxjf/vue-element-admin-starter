@@ -41,6 +41,7 @@
   import event from '@/utils/event'
 
   export default {
+    name: 'DataTable',
     props: {
       // 默认排序
       defaultSort: {
