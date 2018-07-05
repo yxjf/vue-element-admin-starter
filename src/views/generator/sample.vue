@@ -333,7 +333,7 @@
             type: 'warning'
           }).then(() => {
             this.$refs.tabContainer.$emit(event.OPEN_TAB, {
-              label: type === 'create' ? '新建' : '修改',
+              label: type === 'create' ? '新建' : `修改 ID: ${id}`,
               name: 'editTab',
               slotName: 'editTab',
               closable: true
