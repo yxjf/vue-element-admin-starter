@@ -30,8 +30,8 @@
                     <el-select v-model="queryParams.status" placeholder="请选择" :multiple="false">
                       <el-option label="全部" value=""></el-option>
                       <!--TODO 自定义选项-->
-                      <el-option label="是" value="1"></el-option>
-                      <el-option label="否" value="0"></el-option>
+                      <el-option label="是" :value="true"></el-option>
+                      <el-option label="否" :value="false"></el-option>
                     </el-select>
                   </el-form-item>
                   <el-form-item>
@@ -57,7 +57,7 @@
             <el-table-column prop="description" label="内容" align="left"></el-table-column>
             <el-table-column prop="status" label="状态" width="120" align="center">
               <template slot-scope="scope">
-                {{ scope.row.status === 1 ? '是' : '否' }}
+                {{ scope.row.status ? '是' : '否' }}
               </template>
             </el-table-column>
             <el-table-column prop="date" label="日期" align="center" width="100" sortable="custom">
@@ -100,8 +100,8 @@
           </el-form-item>
           <el-form-item label="状态" prop="status">
             <el-select v-model="form.status" placeholder="请选择" :multiple="false">
-              <el-option label="是" value="1"></el-option>
-              <el-option label="否" value="0"></el-option>
+              <el-option label="是" :value="true"></el-option>
+              <el-option label="否" :value="false"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item label="数量">

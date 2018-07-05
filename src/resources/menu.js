@@ -97,6 +97,7 @@ const menu = [
   {
     name: 'generator',
     path: '/generator',
+    // hidden: true,
     component: Layout,
     redirect: '/generator/index',
     meta: {

@@ -47,7 +47,7 @@ export default function (mock) {
         id: i + ~~(Math.random() * 12345),
         title: lorem.substr(0, Math.max(10, ~~(Math.random() * 50))),
         description: lorem.substr(0, Math.max(100, ~~(Math.random() * 300))),
-        status: Math.random() * 2 > 1 ? 1 : 0,
+        status: Math.random() * 2 > 1 ? true : false,
         date: +new Date,
         amount: ~~(Math.random() * 1000000),
       })
@@ -73,7 +73,7 @@ export default function (mock) {
         id: params.id,
         title: lorem.substr(0, Math.max(10, ~~(Math.random() * 50))),
         description: lorem.substr(0, Math.max(100, ~~(Math.random() * 300))),
-        status: Math.random() * 2 > 1 ? 1 : 0,
+        status: Math.random() * 2 > 1 ? true : false,
         date: +new Date,
         amount: ~~(Math.random() * 1000000),
       },
