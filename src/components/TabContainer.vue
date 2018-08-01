@@ -105,8 +105,11 @@
         if (this.pages.some(item => item.name === tabPage.name)) {
           this.handleRemove(tabPage.name);
         }
-        this.pages.push(tabPage);
-        this.activeName = tabPage.name;
+
+        this.$nextTick(() => {
+          this.pages.push(tabPage);
+          this.activeName = tabPage.name;
+        })
 
         if (cb && typeof cb === 'function') {
           cb(this.activeName)
