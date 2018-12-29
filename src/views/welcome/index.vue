@@ -1,11 +1,16 @@
 <template>
   <div>
-    welcome
+    welcome {{env}}
   </div>
 </template>
 
 <script>
   export default {
-    name: 'welcome'
+    name: 'welcome',
+    data() {
+      return {
+        env: process.env.NODE_ENV
+      }
+    }
   }
 </script>

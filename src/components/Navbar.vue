@@ -1,6 +1,6 @@
 <template>
   <el-menu class="navbar" mode="horizontal">
-    <div class="toggle-sidebar" :class="{ collapse: isCollapse }" @click.prevent="aaa">
+    <div class="toggle-sidebar" :class="{ collapse: isCollapse }" @click.prevent="toggleSideBar">
       <i class="fa fa-bars"></i>
     </div>
     <breadcrumb></breadcrumb>
@@ -8,8 +8,9 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
+  import actionTypes from '@/store/action-types'
   import Breadcrumb from '@/components/Breadcrumb'
-  import store from '@/utils/store'
 
   export default {
     name: 'Navbar',
@@ -23,9 +24,7 @@
       }
     },
     methods: {
-      aaa() {
-        store.config.toggleSidebarCollapse()
-      }
+      ...mapActions([actionTypes.toggleSideBar])
     }
   }
 </script>

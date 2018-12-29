@@ -7,10 +7,10 @@
  */
 
 // 页面布局框架
-import Layout from '@/views/layout'
+import Layout from '@/views/layout';
 
 // 用于多级子菜单切换时内容显示
-import EmptyContainer from '@/components/EmptyContainer'
+import EmptyContainer from '@/components/EmptyContainer';
 
 // 菜单资源，用于生成路由和左侧菜单树
 // 菜单 name 命名方式为 x.x.x，对应 views 文件夹下的文件名，如 name: 'welcome.index' 对应 @views/welcome/index.vue 组件
@@ -24,15 +24,17 @@ const menu = [
       title: '首页',
       icon: 'fa fa-home',
     },
-    children: [{
-      name: 'welcome.index',
-      path: 'welcome',
-      component: () => import('@/views/welcome/index'),
-      meta: {
-        title: '首页',
-        icon: 'fa fa-home',
+    children: [
+      {
+        name: 'welcome.index',
+        path: 'welcome',
+        component: () => import('@/views/welcome/index'),
+        meta: {
+          title: '首页',
+          icon: 'fa fa-home',
+        },
       },
-    }]
+    ],
   },
   {
     name: 'example',
@@ -40,7 +42,7 @@ const menu = [
     component: Layout,
     redirect: '/example/bigTable',
     meta: {
-      title: '例子',
+      title: '组件示例',
       icon: 'fa fa-th',
     },
     children: [
@@ -90,9 +92,9 @@ const menu = [
               icon: 'fa fa-code',
             },
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   {
     name: 'generator',
@@ -131,9 +133,9 @@ const menu = [
           title: '测试生成代码',
           icon: 'fa fa-flask',
         },
-      }
-    ]
+      },
+    ],
   },
-]
+];
 
-export default menu
+export default menu;

@@ -7,11 +7,11 @@ A vue admin template with ElementUI for most management system.
 dependencies:
 
 - [vue](https://github.com/vuejs/vue) javascript framework
+- [vuex](https://github.com/vuejs/vuex) state management
 - [vue-router](https://github.com/vuejs/vue-router) official router for Vue.js
 - [axios](https://github.com/axios/axios) ajax requestor
 - [lodash](https://github.com/lodash/lodash) utility library
 - [moment](https://momentjs.com/) dates and times library
-- [pubsub-js](https://github.com/mroderick/PubSubJS) publish/subscribe
 - [store](https://github.com/marcuswestin/store.js) cross-browser storage
 - [normalize.css](https://github.com/necolas/normalize.css) CSS reset
 - [element-ui](https://github.com/ElemeFE/element) UI framework
@@ -41,4 +41,4 @@ yarn build
 
 [MIT](https://github.com/PanJiaChen/vueAdmin-template/blob/master/LICENSE) license.
 
-Copyright (c) youxin.com & jnoodle
+Copyright (c) youxin.com

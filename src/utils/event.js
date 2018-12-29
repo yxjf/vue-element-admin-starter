@@ -9,7 +9,6 @@ const events = {
   OPEN_TAB: 'OPEN_TAB', // 打开标签页
   CLOSE_TAB: 'CLOSE_TAB', // 关闭标签页
   ACTIVE_TAB: 'ACTIVE_TAB', // 激活标签页
+};
 
-}
-
-export default events
+export default events;

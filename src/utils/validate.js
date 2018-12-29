@@ -9,14 +9,14 @@ export default {
       required,
       trigger: 'blur',
       message,
-    }
+    };
   },
   requiredForSelect(message = '此字段必须选择', required = true) {
     return {
       required,
       trigger: 'change',
       message,
-    }
+    };
   },
 
   // 个性化校验规则
@@ -28,12 +28,12 @@ export default {
       trigger: 'blur',
       validator: (rule, value, callback) => {
         if (!value || value.length < 4) {
-          callback(new Error('用户名不能小于4位'))
+          callback(new Error('用户名不能小于4位'));
         } else {
-          callback()
+          callback();
         }
-      }
-    }
+      },
+    };
   },
   // 密码验证规则
   password(required = true) {
@@ -42,11 +42,11 @@ export default {
       trigger: 'blur',
       validator: (rule, value, callback) => {
         if (!value || value.length < 4) {
-          callback(new Error('密码不能小于4位'))
+          callback(new Error('密码不能小于4位'));
         } else {
-          callback()
+          callback();
         }
-      }
-    }
+      },
+    };
   },
-}
+};

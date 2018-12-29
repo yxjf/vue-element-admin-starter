@@ -14,6 +14,6 @@ const api = {
   sample_update: '/sample_update',
   sample_detail: '/sample_detail',
   sample_delete: '/sample_delete',
-}
+};
 
-export default api
+export default api;

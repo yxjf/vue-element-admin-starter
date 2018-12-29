@@ -7,29 +7,31 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "prettier": "node ./scripts/prettier.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "brace": "^0.11.1",
-    "element-ui": "^2.4.2",
-    "lodash": "^4.17.10",
-    "moment": "^2.22.2",
-    "normalize.css": "^8.0.0",
+    "element-ui": "^2.4.11",
+    "lodash": "^4.17.11",
+    "moment": "^2.23.0",
+    "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
-    "pubsub-js": "^1.6.0",
     "store": "^2.0.12",
-    "vue": "^2.5.16",
-    "vue-router": "^3.0.1"
+    "vue": "^2.5.21",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
-    "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
-    "@vue/cli-service": "^3.0.0-beta.15",
+    "@vue/cli-plugin-babel": "^3.2.0",
+    "@vue/cli-plugin-eslint": "^3.2.1",
+    "@vue/cli-service": "^3.2.0",
     "axios-mock-adapter": "^1.15.0",
-    "less": "^3.0.4",
+    "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.5.16"
+    "prettier": "^1.15.3",
+    "vue-template-compiler": "^2.5.21"
   },
   "engines": {
     "node": ">= 8.0.0"

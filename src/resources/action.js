@@ -10,7 +10,6 @@
 const action = {
   // 示例-新建用户
   exampleAddUser: 'example.bigTable.addUser',
+};
 
-}
-
-export default action
+export default action;

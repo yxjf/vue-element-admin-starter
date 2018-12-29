@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="brand">
-      <h2>管理系统</h2>
+      <h2>{{systemName}}</h2>
     </div>
     <el-dropdown placement="bottom">
       <span class="el-dropdown-link">
-        {{ displayName }}的工作台 <i class="el-icon-arrow-down el-icon--right"></i>
+        {{ userInfo.displayName || '用户' }} <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item>个人中心</el-dropdown-item>
@@ -17,15 +17,19 @@
 </template>
 
 <script>
-  import store from '@/utils/store'
-  import * as api from '@/api/login'
+  import { mapGetters } from 'vuex'
+  import config from '@/config'
+  import actionTypes from '@/store/action-types'
 
   export default {
     name: 'Topbar',
     data() {
       return {
-        displayName: store.userInfo.getDisplayName() || '我'
+        systemName: config.systemName
       }
+    },
+    computed: {
+      ...mapGetters(['userInfo'])
     },
     methods: {
       logout() {
@@ -34,8 +38,8 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          api.logout().then(() => {
-            this.$router.push({path: '/login'})
+          this.$store.dispatch(actionTypes.logout).then(() => {
+            this.$router.push({ path: '/login' })
           })
         }).catch(() => {
         })

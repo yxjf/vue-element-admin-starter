@@ -2,14 +2,14 @@
  * 路由设置
  */
 
-import Vue from 'vue'
-import Router from 'vue-router'
-import NProgress from 'nprogress'
-import store from '@/utils/store'
-import permission from '@/utils/permission'
-import menu from '@/resources/menu'
+import Vue from 'vue';
+import Router from 'vue-router';
+import NProgress from 'nprogress';
+import store from '@/store';
+import permission from '@/utils/permission';
+import menu from '@/resources/menu';
 
-Vue.use(Router)
+Vue.use(Router);
 
 const routes = [
   {
@@ -18,7 +18,7 @@ const routes = [
     meta: {
       title: '登录',
     },
-    component: () => import('@/views/login/index')
+    component: () => import('@/views/login/index'),
   },
   ...menu,
   {
@@ -26,48 +26,47 @@ const routes = [
     meta: {
       title: '404',
     },
-    component: () => import('@/views/404')
+    component: () => import('@/views/404'),
   },
-]
+];
 
 const router = new Router({
-  mode: 'history',  // 路由模式
-  scrollBehavior: () => ({x: 0, y: 0}),
+  mode: 'history', // 路由模式
+  scrollBehavior: () => ({ x: 0, y: 0 }),
   routes,
-})
+});
 
 // 路由跳转前进行身份认证
 
 // 白名单，不会重定向
-const whiteList = [
-  '/login',
-]
+const whiteList = ['/login'];
 
 router.beforeEach((to, from, next) => {
-  NProgress.start()
-  document.title = to.meta.title
+  NProgress.start();
+  document.title = to.meta.title;
+
   // 如果存在 token
-  if (store.token.get() && permission.isAuthMenu(to.name)) {
+  if (store.getters['token'] && permission.isAuthMenu(to.name)) {
     if (to.path === '/login') {
       // 跳过登录
-      next({path: '/'})
-      NProgress.done()
+      next({ path: '/' });
+      NProgress.done();
     } else {
-      next()
+      next();
     }
   } else {
     if (whiteList.indexOf(to.path) > -1) {
-      next()
+      next();
     } else {
       // 直接跳转到登录，也可以给出提示
-      next({path: '/login'})
-      NProgress.done()
+      next({ path: '/login' });
+      NProgress.done();
     }
   }
-})
+});
 
 router.afterEach(() => {
-  NProgress.done()
-})
+  NProgress.done();
+});
 
-export default router
+export default router;

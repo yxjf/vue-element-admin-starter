@@ -5,12 +5,12 @@
         <topbar></topbar>
       </el-header>
       <el-container>
-        <el-aside :class="{ collapse: isCollapse }">
-          <sidebar :is-collapse="isCollapse"></sidebar>
+        <el-aside :class="{ collapse: sidebarCollapse }">
+          <sidebar :is-collapse="sidebarCollapse"></sidebar>
         </el-aside>
         <el-container>
           <el-header>
-            <navbar :is-collapse="isCollapse"></navbar>
+            <navbar :is-collapse="sidebarCollapse"></navbar>
           </el-header>
           <el-main id="main-container">
             <transition name="fade" mode="out-in">
@@ -30,12 +30,8 @@
   import Topbar from '@/components/Topbar'
   import Sidebar from '@/components/Sidebar'
   import Navbar from '@/components/Navbar'
-  import store from '@/utils/store'
-  import topic from '@/utils/topic'
-  import PubSub from 'pubsub-js'
   import _ from 'lodash'
-
-  let _catchScroll;
+  import {mapGetters} from 'vuex'
 
   export default {
     name: 'layout',
@@ -46,19 +42,17 @@
     },
     data() {
       return {
-        isCollapse: store.config.getSidebarCollapse(),
         backTopVisible: false, // 是否显示滚动到顶端
       }
     },
+    computed: {
+      ...mapGetters(['sidebarCollapse'])
+    },
     mounted() {
-      PubSub.subscribe(topic.TOGGLE_SIDEBAR_COLLAPSE, () => {
-        this.isCollapse = store.config.getSidebarCollapse()
-      })
 
-      // 滚动到顶端
+      // 监听滚动
       let _container = document.getElementById("main-container");
-      _catchScroll = _.debounce(this.catchScroll, 100)
-      _container.addEventListener('scroll', _catchScroll)
+      _container.addEventListener('scroll', this.catchScroll)
       window.smoothscroll = () => {
         let currentScroll = _container.scrollTop
         if (currentScroll > 0) {
@@ -67,17 +61,21 @@
         }
       }
     },
-    destroyed() {
-      document.getElementById("main-container").removeEventListener('scroll', _catchScroll)
-    },
     methods: {
-      catchScroll() {
+      catchScroll: _.debounce(function () {
         this.backTopVisible = document.getElementById("main-container").scrollTop > 100
-      },
-      // 滚动到顶部
+      }, 100),
+      // 平滑滚动到顶部
       backToTop() {
         window.smoothscroll()
       },
     }
   }
 </script>
+
+<style scoped>
+  #main-container {
+    height: calc(100vh - 100px);
+    padding-bottom: 50px;
+  }
+</style>
