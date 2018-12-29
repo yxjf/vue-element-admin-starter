@@ -15,8 +15,12 @@ let didError = false;
 
 let files = [];
 const jsFiles = glob.sync('**/*.js*', { ignore: ['**/node_modules/**', 'build/**', 'dist/**'] });
+const vueFiles = glob.sync('src/**/*.vue', {
+  ignore: ['**/node_modules/**', 'build/**', 'dist/**'],
+});
 const lessFiles = glob.sync('src/**/*.less*', { ignore: ['**/node_modules/**', 'build/**'] });
 files = files.concat(jsFiles);
+files = files.concat(vueFiles);
 files = files.concat(lessFiles);
 if (!files.length) {
   return;

@@ -1,14 +1,11 @@
 <template>
   <div class="tab-container">
-    <el-tabs
-      v-model="activeName"
-      @tab-click="handleClick"
-      @tab-remove="handleRemove"
-    >
+    <el-tabs v-model="activeName" @tab-click="handleClick" @tab-remove="handleRemove">
       <el-tab-pane
         :label="defaultPage.label || '默认页'"
         :name="defaultPage.name || 'default'"
-        :closable="defaultPage.closable || false">
+        :closable="defaultPage.closable || false"
+      >
         <slot :name="defaultPage.slotName || 'default'"></slot>
       </el-tab-pane>
       <el-tab-pane
@@ -16,7 +13,8 @@
         :label="item.label"
         :name="item.name"
         :closable="item.closable"
-        :key="item.name">
+        :key="item.name"
+      >
         <slot :name="item.slotName"></slot>
       </el-tab-pane>
     </el-tabs>
@@ -24,120 +22,119 @@
 </template>
 
 <script>
-  // 包含标签的页面，适合逻辑较多的功能页面
-  import event from '@/utils/event'
+// 包含标签的页面，适合逻辑较多的功能页面
+import event from '@/utils/event';
 
-  export default {
-    name: 'TabContainer',
-    props: {
-      // 默认开启页
-      defaultPage: {
-        type: Object
-      },
-      // tab 新建时触发
-      tabCreate: {
-        type: Function,
-        required: false
-      },
-      // tab 被选中时触发
-      tabClick: {
-        type: Function,
-        required: false
-      },
-      // 点击 tab 移除按钮后触发
-      tabRemove: {
-        type: Function,
-        required: false
-      },
+export default {
+  name: 'TabContainer',
+  props: {
+    // 默认开启页
+    defaultPage: {
+      type: Object,
     },
-    data() {
-      return {
-        activeName: this.defaultPage.name,
-        pages: [],
-        length: 0,
-        tabPage: {},
-        index: 0,
-        showLoad: true
+    // tab 新建时触发
+    tabCreate: {
+      type: Function,
+      required: false,
+    },
+    // tab 被选中时触发
+    tabClick: {
+      type: Function,
+      required: false,
+    },
+    // 点击 tab 移除按钮后触发
+    tabRemove: {
+      type: Function,
+      required: false,
+    },
+  },
+  data() {
+    return {
+      activeName: this.defaultPage.name,
+      pages: [],
+      length: 0,
+      tabPage: {},
+      index: 0,
+      showLoad: true,
+    };
+  },
+  mounted() {
+    this.$on(event.OPEN_TAB, (tabPage, cb) => {
+      this.openTabPage(tabPage, cb);
+    });
+    this.$on(event.CLOSE_TAB, (tabPageName, cb) => {
+      this.handleRemove(tabPageName, cb);
+    });
+    this.$on(event.ACTIVE_TAB, (tabPageName, cb) => {
+      this.activeName = tabPageName;
+
+      if (cb && typeof cb === 'function') {
+        cb(this.activeName);
+      }
+    });
+  },
+  methods: {
+    // 关闭页面
+    handleRemove(targetName, cb) {
+      const tabs = this.pages.filter(tab => {
+        return tab.name !== targetName;
+      });
+      this.pages = tabs;
+      // 设置关闭后默认打开的标签页
+      this.activeName = tabs.length > 0 ? tabs[tabs.length - 1].name : this.defaultPage.name;
+
+      if (cb && typeof cb === 'function') {
+        cb(this.activeName);
+      }
+
+      if (this.tabRemove) {
+        this.tabRemove(targetName);
       }
     },
-    mounted() {
-      this.$on(event.OPEN_TAB, (tabPage, cb) => {
-        this.openTabPage(tabPage, cb)
-      });
-      this.$on(event.CLOSE_TAB, (tabPageName, cb) => {
-        this.handleRemove(tabPageName, cb)
-      });
-      this.$on(event.ACTIVE_TAB, (tabPageName, cb) => {
-        this.activeName = tabPageName
-
-        if (cb && typeof cb === 'function') {
-          cb(this.activeName)
-        }
-      });
+    // tab 被选中时触发
+    handleClick(tab) {
+      if (this.tabClick) {
+        this.tabClick(tab);
+      }
     },
-    methods: {
-      // 关闭页面
-      handleRemove(targetName, cb) {
-        const tabs = this.pages.filter((tab) => {
-          return tab.name !== targetName
-        })
-        this.pages = tabs
-        // 设置关闭后默认打开的标签页
-        this.activeName = tabs.length > 0 ? tabs[tabs.length - 1].name : this.defaultPage.name
+    // 打开新页面
+    openTabPage(tabPage, cb) {
+      // 先关闭存在的同名的，再打开
+      if (this.pages.some(item => item.name === tabPage.name)) {
+        this.handleRemove(tabPage.name);
+      }
 
-        if (cb && typeof cb === 'function') {
-          cb(this.activeName)
-        }
+      this.$nextTick(() => {
+        this.pages.push(tabPage);
+        this.activeName = tabPage.name;
+      });
 
-        if (this.tabRemove) {
-          this.tabRemove(targetName)
-        }
-      },
-      // tab 被选中时触发
-      handleClick(tab) {
-        if (this.tabClick) {
-          this.tabClick(tab)
-        }
-      },
-      // 打开新页面
-      openTabPage(tabPage, cb) {
-        // 先关闭存在的同名的，再打开
-        if (this.pages.some(item => item.name === tabPage.name)) {
-          this.handleRemove(tabPage.name);
-        }
+      if (cb && typeof cb === 'function') {
+        cb(this.activeName);
+      }
 
-        this.$nextTick(() => {
-          this.pages.push(tabPage);
-          this.activeName = tabPage.name;
-        })
-
-        if (cb && typeof cb === 'function') {
-          cb(this.activeName)
-        }
-
-        if (this.tabCreate) {
-          this.tabCreate(tabPage)
-        }
-      },
-    }
-  }
-
+      if (this.tabCreate) {
+        this.tabCreate(tabPage);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .tab-page, .el-tabs {
-    height: 100%;
-  }
+.tab-page,
+.el-tabs {
+  height: 100%;
+}
 
-  .el-tab-pane {
-    position: relative !important;
-    min-height: 300px !important;
-    padding-bottom: 50px !important;
-  }
+.el-tab-pane {
+  position: relative !important;
+  min-height: 300px !important;
+  padding-bottom: 50px !important;
+}
 
-  .el-tabs--border-card {
-    border-bottom: none;
-    box-shadow: none;
-  }
-
+.el-tabs--border-card {
+  border-bottom: none;
+  box-shadow: none;
+}
 </style>

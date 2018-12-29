@@ -1,9 +1,9 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
-  export default {
-    name: 'EmptyContainer'
-  }
+export default {
+  name: 'EmptyContainer',
+};
 </script>

@@ -5,9 +5,11 @@
   "description": "A vue admin template with ElementUI for most management system",
   "author": "jnoodle <fullstack@126.com>",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "lint:style": "stylelint  --fix \"src/**/*.less\" --syntax less",
+    "lint-staged": "lint-staged",
     "prettier": "node ./scripts/prettier.js"
   },
   "dependencies": {
@@ -28,9 +30,14 @@
     "@vue/cli-plugin-eslint": "^3.2.1",
     "@vue/cli-service": "^3.2.0",
     "axios-mock-adapter": "^1.15.0",
+    "husky": "^1.3.1",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
+    "stylelint": "^9.9.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0",
     "vue-template-compiler": "^2.5.21"
   },
   "engines": {
@@ -40,5 +47,19 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "lint-staged": {
+    "**/*.{js,vue,less}": [
+      "node ./scripts/prettier.js",
+      "git add"
+    ],
+    "src/**/*.{js,vue}": "vue-cli-service lint",
+    "src/**/*.less": "stylelint  --fix \"src/**/*.less\" --syntax less"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged",
+      "postcommit": "git update-index --again"
+    }
+  }
 }

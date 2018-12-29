@@ -8,23 +8,23 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
-  import actionTypes from '@/store/action-types'
-  import Breadcrumb from '@/components/Breadcrumb'
+import { mapActions } from 'vuex';
+import actionTypes from '@/store/action-types';
+import Breadcrumb from '@/components/Breadcrumb';
 
-  export default {
-    name: 'Navbar',
-    components: {
-      Breadcrumb,
+export default {
+  name: 'Navbar',
+  components: {
+    Breadcrumb,
+  },
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false,
     },
-    props: {
-      isCollapse: {
-        type: Boolean,
-        default: false
-      }
-    },
-    methods: {
-      ...mapActions([actionTypes.toggleSideBar])
-    }
-  }
+  },
+  methods: {
+    ...mapActions([actionTypes.toggleSideBar]),
+  },
+};
 </script>

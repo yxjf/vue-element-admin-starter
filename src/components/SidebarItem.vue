@@ -2,18 +2,21 @@
   <div class="menu-item">
     <template v-for="item in menu" v-if="item.children && !item.hidden">
       <!--只有一个子元素的菜单资源直接单独显示-->
-      <el-menu-item v-if="item.children.length === 1"
-                    :index="item.children[0].name" :key="item.children[0].name"
-                    :class="{'submenu-title-noDropdown':!isNest}">
-        <i :class="[ item.children[0].meta.icon || 'fa fa-navicon']"></i>
-        <span slot="title">{{item.children[0].meta.title}}</span>
+      <el-menu-item
+        v-if="item.children.length === 1"
+        :index="item.children[0].name"
+        :key="item.children[0].name"
+        :class="{ 'submenu-title-noDropdown': !isNest }"
+      >
+        <i :class="[item.children[0].meta.icon || 'fa fa-navicon']"></i>
+        <span slot="title">{{ item.children[0].meta.title }}</span>
       </el-menu-item>
 
       <!--有多个子元素的菜单资源多级显示-->
       <el-submenu v-else :index="item.name" :key="item.name">
         <template slot="title">
-          <i :class="[ item.meta.icon || 'fa fa-navicon']"></i>
-          <span slot="title">{{item.meta.title}}</span>
+          <i :class="[item.meta.icon || 'fa fa-navicon']"></i>
+          <span slot="title">{{ item.meta.title }}</span>
         </template>
 
         <template v-for="child in item.children" v-if="!child.hidden">
@@ -23,12 +26,13 @@
             :is-nest="true"
             class="nest-menu"
             :menu="[child]"
-            :key="child.name">
+            :key="child.name"
+          >
           </sidebar-item>
 
           <el-menu-item v-else :index="child.name" :key="child.name">
-            <i :class="[ child.meta.icon || 'fa fa-navicon']"></i>
-            <span slot="title">{{child.meta.title}}</span>
+            <i :class="[child.meta.icon || 'fa fa-navicon']"></i>
+            <span slot="title">{{ child.meta.title }}</span>
           </el-menu-item>
         </template>
       </el-submenu>
@@ -37,16 +41,16 @@
 </template>
 
 <script>
-  export default {
-    name: 'SidebarItem',
-    props: {
-      menu: {
-        type: Array
-      },
-      isNest: {
-        type: Boolean,
-        default: false
-      }
+export default {
+  name: 'SidebarItem',
+  props: {
+    menu: {
+      type: Array,
     },
-  }
+    isNest: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
 </script>

@@ -16,12 +16,11 @@
           type="daterange"
           range-separator="至"
           start-placeholder="开始日期"
-          end-placeholder="结束日期">
+          end-placeholder="结束日期"
+        >
         </el-date-picker>
       </el-form-item>
-      <el-form-item label="开关">
-        <el-switch v-model="form.switch"></el-switch>
-      </el-form-item>
+      <el-form-item label="开关"> <el-switch v-model="form.switch"></el-switch> </el-form-item>
       <el-form-item label="多选框">
         <el-checkbox-group v-model="form.type">
           <el-checkbox label="选项1" name="type"></el-checkbox>
@@ -52,51 +51,51 @@
 </template>
 
 <script>
-  import validate from '@/utils/validate'
+import validate from '@/utils/validate';
 
-  export default {
-    name: 'bigForm',
+export default {
+  name: 'bigForm',
 
-    data() {
-      return {
-        form: {
-          title: '',
-          status: '',
-          dateRange: '',
-          switch: false,
-          type: [],
-          resource: '',
-          desc: ''
-        },
-        formRules: {
-          title: [validate.required()],
-          status: [validate.required()],
-        }
-      }
-    },
-    methods: {
-      onSubmit() {
-        this.$refs.form.validate(valid => {
-          if (valid) {
-            this.$message.success('提交成功')
-          }
-          return false
-        })
+  data() {
+    return {
+      form: {
+        title: '',
+        status: '',
+        dateRange: '',
+        switch: false,
+        type: [],
+        resource: '',
+        desc: '',
       },
-      onCancel() {
-        this.$message.warning('取消')
-      }
-    }
-  }
+      formRules: {
+        title: [validate.required()],
+        status: [validate.required()],
+      },
+    };
+  },
+  methods: {
+    onSubmit() {
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.$message.success('提交成功');
+        }
+        return false;
+      });
+    },
+    onCancel() {
+      this.$message.warning('取消');
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .code {
-    color: #409EFF;
-    margin-left: 120px;
-    font-size: 14px;
-    white-space: normal;
-    word-wrap: break-word;
-    line-height: 2;
-  }
+.code {
+  color: #409eff;
+  margin-left: 120px;
+  font-size: 14px;
+  white-space: normal;
+  word-wrap: break-word;
+  line-height: 2;
+}
 </style>

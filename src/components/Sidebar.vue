@@ -16,30 +16,30 @@
 </template>
 
 <script>
-  import SidebarItem from '@/components/SidebarItem'
-  import permission from '@/utils/permission'
+import SidebarItem from '@/components/SidebarItem';
+import permission from '@/utils/permission';
 
-  export default {
-    name: 'Sidebar',
-    components: {
-      SidebarItem
+export default {
+  name: 'Sidebar',
+  components: {
+    SidebarItem,
+  },
+  data() {
+    return {
+      menu: permission.filteredMenu(), // 只显示授权访问的菜单
+    };
+  },
+  props: {
+    isCollapse: {
+      type: Boolean,
+      default: false,
     },
-    data() {
-      return {
-        menu: permission.filteredMenu(),  // 只显示授权访问的菜单
-      }
+  },
+  methods: {
+    // 导航菜单的点选处理
+    handleSelect(index) {
+      this.$router.push({ name: index });
     },
-    props: {
-      isCollapse: {
-        type: Boolean,
-        default: false
-      }
-    },
-    methods: {
-      // 导航菜单的点选处理
-      handleSelect(index) {
-        this.$router.push({name: index})
-      },
-    }
-  }
+  },
+};
 </script>

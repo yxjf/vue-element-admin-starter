@@ -13,92 +13,141 @@
         </div>
       </el-col>
       <el-col :span="16">
-        <p class="small">这里主要是快速生成带有大列表、查询、新建、修改、删除功能的页面代码，
-          <router-link :to="{name:'generator.sample'}">
+        <p class="small">
+          这里主要是快速生成带有大列表、查询、新建、修改、删除功能的页面代码，
+          <router-link :to="{ name: 'generator.sample' }">
             <el-button type="text">效果例子</el-button>
           </router-link>
         </p>
-        <el-form :model="dynamicForm" ref="dynamicForm" label-width="100px" :inline="true" size="small" class="dynamic">
-          <el-form-item class="label">
-            <span class="tiny-input">属性名</span>
-          </el-form-item>
-          <el-form-item class="label">
-            <span class="tiny-input">属性显示名</span>
-          </el-form-item>
-          <el-form-item class="label">
-            <span class="tiny-select">请选择类型</span>
-          </el-form-item>
-          <el-form-item class="label">
-            <span class="tiny-select">是否查询</span>
-          </el-form-item>
-          <el-form-item class="label">
-            <span class="tiny-select">是否编辑</span>
-          </el-form-item>
-          <el-form-item class="label">
-            <span class="tiny-select">是否校验</span>
-          </el-form-item>
+        <el-form
+          :model="dynamicForm"
+          ref="dynamicForm"
+          label-width="100px"
+          :inline="true"
+          size="small"
+          class="dynamic"
+        >
+          <el-form-item class="label"> <span class="tiny-input">属性名</span> </el-form-item>
+          <el-form-item class="label"> <span class="tiny-input">属性显示名</span> </el-form-item>
+          <el-form-item class="label"> <span class="tiny-select">请选择类型</span> </el-form-item>
+          <el-form-item class="label"> <span class="tiny-select">是否查询</span> </el-form-item>
+          <el-form-item class="label"> <span class="tiny-select">是否编辑</span> </el-form-item>
+          <el-form-item class="label"> <span class="tiny-select">是否校验</span> </el-form-item>
           <el-form-item class="label">
             <span class="tiny-select">是否在列表显示</span>
           </el-form-item>
-          <el-form-item class="label">
-            <span class="tiny-select">是否可排序</span>
-          </el-form-item>
-          <br>
+          <el-form-item class="label"> <span class="tiny-select">是否可排序</span> </el-form-item>
+          <br />
           <div v-for="(prop, index) in dynamicForm.props" :key="index">
             <el-form-item :prop="'props[' + index + '].name'" :rules="validate.required()">
               <el-input v-model="prop.name" placeholder="属性名" class="tiny-input"></el-input>
             </el-form-item>
             <el-form-item :prop="'props[' + index + '].displayName'" :rules="validate.required()">
-              <el-input v-model="prop.displayName" placeholder="属性显示名" class="tiny-input"></el-input>
+              <el-input
+                v-model="prop.displayName"
+                placeholder="属性显示名"
+                class="tiny-input"
+              ></el-input>
             </el-form-item>
             <el-form-item :prop="'props[' + index + '].type'" :rules="validate.requiredForSelect()">
-              <el-select v-model="prop.type" placeholder="请选择类型" class="tiny-select" :disabled="index===0">
+              <el-select
+                v-model="prop.type"
+                placeholder="请选择类型"
+                class="tiny-select"
+                :disabled="index === 0"
+              >
                 <el-option label="String" value="String"></el-option>
                 <el-option label="Number" value="Number"></el-option>
                 <el-option label="Date" value="Date"></el-option>
                 <el-option label="Boolean" value="Boolean"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :prop="'props[' + index + '].isQuery'" :rules="validate.requiredForSelect()">
-              <el-select v-model="prop.isQuery" placeholder="是否查询" class="tiny-select" :disabled="index===0">
+            <el-form-item
+              :prop="'props[' + index + '].isQuery'"
+              :rules="validate.requiredForSelect()"
+            >
+              <el-select
+                v-model="prop.isQuery"
+                placeholder="是否查询"
+                class="tiny-select"
+                :disabled="index === 0"
+              >
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :prop="'props[' + index + '].isEdit'" :rules="validate.requiredForSelect()">
-              <el-select v-model="prop.isEdit" placeholder="是否编辑" class="tiny-select" :disabled="index===0">
+            <el-form-item
+              :prop="'props[' + index + '].isEdit'"
+              :rules="validate.requiredForSelect()"
+            >
+              <el-select
+                v-model="prop.isEdit"
+                placeholder="是否编辑"
+                class="tiny-select"
+                :disabled="index === 0"
+              >
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :prop="'props[' + index + '].isValidate'" :rules="validate.requiredForSelect()">
-              <el-select v-model="prop.isValidate" placeholder="是否校验" class="tiny-select" :disabled="index===0">
+            <el-form-item
+              :prop="'props[' + index + '].isValidate'"
+              :rules="validate.requiredForSelect()"
+            >
+              <el-select
+                v-model="prop.isValidate"
+                placeholder="是否校验"
+                class="tiny-select"
+                :disabled="index === 0"
+              >
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :prop="'props[' + index + '].isTableShow'" :rules="validate.requiredForSelect()">
-              <el-select v-model="prop.isTableShow" placeholder="是否在列表显示" class="tiny-select">
+            <el-form-item
+              :prop="'props[' + index + '].isTableShow'"
+              :rules="validate.requiredForSelect()"
+            >
+              <el-select
+                v-model="prop.isTableShow"
+                placeholder="是否在列表显示"
+                class="tiny-select"
+              >
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item :prop="'props[' + index + '].isSortable'" :rules="validate.requiredForSelect()">
+            <el-form-item
+              :prop="'props[' + index + '].isSortable'"
+              :rules="validate.requiredForSelect()"
+            >
               <el-select v-model="prop.isSortable" placeholder="是否可排序" class="tiny-select">
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item v-if="index > 0">
-              <el-button type="danger" size="mini" icon="el-icon-delete" circle
-                         title="删除" @click="removeProp(prop)"></el-button>
+              <el-button
+                type="danger"
+                size="mini"
+                icon="el-icon-delete"
+                circle
+                title="删除"
+                @click="removeProp(prop)"
+              ></el-button>
             </el-form-item>
-            <el-form-item v-if="index === dynamicForm.props.length -1">
-              <el-button type="primary" size="mini" icon="el-icon-plus" circle
-                         title="增加" @click="addProp"></el-button>
+            <el-form-item v-if="index === dynamicForm.props.length - 1">
+              <el-button
+                type="primary"
+                size="mini"
+                icon="el-icon-plus"
+                circle
+                title="增加"
+                @click="addProp"
+              ></el-button>
             </el-form-item>
           </div>
-          <br>
+          <br />
           <el-form-item>
             <el-button type="primary" @click="submitForm">生成代码</el-button>
             <el-button @click="resetForm">重置</el-button>
@@ -110,78 +159,78 @@
 </template>
 
 <script>
-  import editor from '@/components/VueBrace'
-  import validate from '@/utils/validate'
+import editor from '@/components/VueBrace';
+import validate from '@/utils/validate';
 
-  // 代码生成器
-  export default {
-    name: 'generator',
-    components: {
-      editor
-    },
-    data() {
-      return {
-        lang: 'javascript',
-        theme: 'github',
-        sourceCode: '',
-        options: {
-          tabSize: 2,
-          useSoftTabs: true,
-          highlightActiveLine: true,
-          highlightSelectedWord: true,
-          useWorker: false, // 关闭 lint
-        },
-        sourceCodeEditor: null,  // editor 引用
-        validate,
-        dynamicForm: {
-          props: [
-            {
-              name: 'id', // 字段名
-              displayName: 'ID', // 显示名
-              type: 'ID', // 类型
-              isQuery: false, // 是否查询
-              isEdit: false, // 是否编辑
-              isValidate: false, // 是否校验，默认校验规则是必填
-              isTableShow: true, // 是否在列表显示
-              isSortable: false, // 是否可排序
-            },
-            {
-              name: '', // 字段名
-              displayName: '', // 显示名
-              type: 'String', // 类型
-              isQuery: false, // 是否查询
-              isEdit: true, // 是否编辑
-              isValidate: false, // 是否校验，默认校验规则是必填
-              isTableShow: true, // 是否在列表显示
-              isSortable: false, // 是否可排序
-            }
-          ],
-        },
-      }
-    },
-    mounted() {
-    },
-    methods: {
-      sourceCodeEditorInit(editor) {
-        // 获取 editor 引用
-        this.sourceCodeEditor = editor
+// 代码生成器
+export default {
+  name: 'generator',
+  components: {
+    editor,
+  },
+  data() {
+    return {
+      lang: 'javascript',
+      theme: 'github',
+      sourceCode: '',
+      options: {
+        tabSize: 2,
+        useSoftTabs: true,
+        highlightActiveLine: true,
+        highlightSelectedWord: true,
+        useWorker: false, // 关闭 lint
       },
-      submitForm() {
-        this.$refs.dynamicForm.validate((valid) => {
-          if (valid) {
-            this.generateCode()
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+      sourceCodeEditor: null, // editor 引用
+      validate,
+      dynamicForm: {
+        props: [
+          {
+            name: 'id', // 字段名
+            displayName: 'ID', // 显示名
+            type: 'ID', // 类型
+            isQuery: false, // 是否查询
+            isEdit: false, // 是否编辑
+            isValidate: false, // 是否校验，默认校验规则是必填
+            isTableShow: true, // 是否在列表显示
+            isSortable: false, // 是否可排序
+          },
+          {
+            name: '', // 字段名
+            displayName: '', // 显示名
+            type: 'String', // 类型
+            isQuery: false, // 是否查询
+            isEdit: true, // 是否编辑
+            isValidate: false, // 是否校验，默认校验规则是必填
+            isTableShow: true, // 是否在列表显示
+            isSortable: false, // 是否可排序
+          },
+        ],
       },
-      resetForm() {
-        this.$confirm(`此操作将会清空所有条目，是否继续？`, '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
+    };
+  },
+  mounted() {},
+  methods: {
+    sourceCodeEditorInit(editor) {
+      // 获取 editor 引用
+      this.sourceCodeEditor = editor;
+    },
+    submitForm() {
+      this.$refs.dynamicForm.validate(valid => {
+        if (valid) {
+          this.generateCode();
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+    resetForm() {
+      this.$confirm(`此操作将会清空所有条目，是否继续？`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+      })
+        .then(() => {
           this.dynamicForm = {
             props: [
               {
@@ -193,199 +242,267 @@
                 isValidate: false,
                 isTableShow: true,
                 isSortable: false,
-              }
+              },
             ],
-          }
-        }).catch(() => {
+          };
         })
-      },
-      removeProp(item) {
-        var index = this.dynamicForm.props.indexOf(item)
-        if (index !== -1) {
-          this.dynamicForm.props.splice(index, 1)
-        }
-      },
-      addProp() {
-        this.dynamicForm.props.push({
-          name: '',
-          displayName: '',
-          type: 'String',
-          isQuery: false,
-          isEdit: true,
-          isValidate: false,
-          isTableShow: true,
-          isSortable: false,
-        });
-      },
-      generateCode() {
+        .catch(() => {});
+    },
+    removeProp(item) {
+      var index = this.dynamicForm.props.indexOf(item);
+      if (index !== -1) {
+        this.dynamicForm.props.splice(index, 1);
+      }
+    },
+    addProp() {
+      this.dynamicForm.props.push({
+        name: '',
+        displayName: '',
+        type: 'String',
+        isQuery: false,
+        isEdit: true,
+        isValidate: false,
+        isTableShow: true,
+        isSortable: false,
+      });
+    },
+    generateCode() {
+      /* eslint-disable */
+      const scriptBegin = '<script>';
+      const scriptEnd = '<\/script>';
+      let searchFormHtml = '';
+      let columnsHtml = '';
+      let editFormHtml = '';
+      let detailFormHtml = '';
+      let queryParamsProps = '';
+      let editFormProps = '';
+      let editFormRules = '';
+      let detailFormProps = '';
 
-        /* eslint-disable */
-        const scriptBegin = '<script>'
-        const scriptEnd = '<\/script>'
-        let searchFormHtml = ''
-        let columnsHtml = ''
-        let editFormHtml = ''
-        let detailFormHtml = ''
-        let queryParamsProps = ''
-        let editFormProps = ''
-        let editFormRules = ''
-        let detailFormProps = ''
+      this.dynamicForm.props.forEach((prop, index, props) => {
+        let _searchItem = '';
+        let _columnItem = '';
+        let _editItem = '';
+        let _detailItem = '';
 
-        this.dynamicForm.props.forEach((prop, index, props) => {
-          let _searchItem = ''
-          let _columnItem = ''
-          let _editItem = ''
-          let _detailItem = ''
-
-          switch (prop.type) {
-            case 'String':
-              _searchItem = prop.isQuery ? `
+        switch (prop.type) {
+          case 'String':
+            _searchItem = prop.isQuery
+              ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${prop.displayName}关键字"></el-input>
-                  </el-form-item>` : ''
+                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${
+                  prop.displayName
+                }关键字"></el-input>
+                  </el-form-item>`
+              : '';
 
-              _columnItem = prop.isTableShow ? `
-            <el-table-column prop="${prop.name}" label="${prop.displayName}" align="left" ${prop.isSortable ? 'sortable="custom"' : ''}>
+            _columnItem = prop.isTableShow
+              ? `
+            <el-table-column prop="${prop.name}" label="${prop.displayName}" align="left" ${
+                  prop.isSortable ? 'sortable="custom"' : ''
+                }>
               <template slot-scope="scope">
                 {{ scope.row.${prop.name} }}
               </template>
-            </el-table-column>` : ''
+            </el-table-column>`
+              : '';
 
-              _editItem = prop.isEdit ? `
-          <el-form-item label="${prop.displayName}" ${prop.isValidate ? 'prop="' + prop.name + '"' : ''}>
-            <el-input type="text" v-model="form.${prop.name}" placeholder="请输入${prop.displayName}"></el-input>
-          </el-form-item>` : ''
+            _editItem = prop.isEdit
+              ? `
+          <el-form-item label="${prop.displayName}" ${
+                  prop.isValidate ? 'prop="' + prop.name + '"' : ''
+                }>
+            <el-input type="text" v-model="form.${prop.name}" placeholder="请输入${
+                  prop.displayName
+                }"></el-input>
+          </el-form-item>`
+              : '';
 
-              _detailItem = `
+            _detailItem = `
               <el-form-item label="${prop.displayName}">
                 <span>{{ detail.${prop.name} }}</span>
-              </el-form-item>`
-              break;
+              </el-form-item>`;
+            break;
 
-            case 'Number':
-              _searchItem = prop.isQuery ? `
+          case 'Number':
+            _searchItem = prop.isQuery
+              ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-input type="number" v-model="queryParams.${prop.name}" placeholder="请输入${prop.displayName}关键字"></el-input>
-                  </el-form-item>` : ''
+                    <el-input type="number" v-model="queryParams.${prop.name}" placeholder="请输入${
+                  prop.displayName
+                }关键字"></el-input>
+                  </el-form-item>`
+              : '';
 
-              _columnItem = prop.isTableShow ? `
-            <el-table-column prop="${prop.name}" label="${prop.displayName}" align="right" width="100" ${prop.isSortable ? 'sortable="custom"' : ''}>
+            _columnItem = prop.isTableShow
+              ? `
+            <el-table-column prop="${prop.name}" label="${
+                  prop.displayName
+                }" align="right" width="100" ${prop.isSortable ? 'sortable="custom"' : ''}>
               <template slot-scope="scope">
                 {{ scope.row.${prop.name} | thousand }}
               </template>
-            </el-table-column>` : ''
+            </el-table-column>`
+              : '';
 
-              _editItem = prop.isEdit ? `
-          <el-form-item label="${prop.displayName}" ${prop.isValidate ? 'prop="' + prop.name + '"' : ''}>
-            <el-input type="number" v-model="form.${prop.name}" placeholder="请输入${prop.displayName}"></el-input>
-          </el-form-item>` : ''
+            _editItem = prop.isEdit
+              ? `
+          <el-form-item label="${prop.displayName}" ${
+                  prop.isValidate ? 'prop="' + prop.name + '"' : ''
+                }>
+            <el-input type="number" v-model="form.${prop.name}" placeholder="请输入${
+                  prop.displayName
+                }"></el-input>
+          </el-form-item>`
+              : '';
 
-              _detailItem = `
+            _detailItem = `
               <el-form-item label="${prop.displayName}">
                 <span>{{ detail.${prop.name} | thousand }}</span>
-              </el-form-item>`
-              break;
+              </el-form-item>`;
+            break;
 
-            case 'Date':
-              _searchItem = prop.isQuery ? `
+          case 'Date':
+            _searchItem = prop.isQuery
+              ? `
                   <el-form-item label="${prop.displayName}">
                     <el-date-picker type="daterange" v-model="queryParams.${prop.name}"
                                     range-separator="至" start-placeholder="开始" end-placeholder="结束">
                     </el-date-picker>
-                  </el-form-item>` : ''
+                  </el-form-item>`
+              : '';
 
-              _columnItem = prop.isTableShow ? `
-            <el-table-column prop="${prop.name}" label="${prop.displayName}" align="center" width="100" ${prop.isSortable ? 'sortable="custom"' : ''}>
+            _columnItem = prop.isTableShow
+              ? `
+            <el-table-column prop="${prop.name}" label="${
+                  prop.displayName
+                }" align="center" width="100" ${prop.isSortable ? 'sortable="custom"' : ''}>
               <template slot-scope="scope">
                 {{ scope.row.${prop.name} | datetime('YYYY-MM-DD') }}
               </template>
-            </el-table-column>` : ''
+            </el-table-column>`
+              : '';
 
-              _editItem = prop.isEdit ? `
-          <el-form-item label="${prop.displayName}" ${prop.isValidate ? 'prop="' + prop.name + '"' : ''}>
-            <el-date-picker v-model="form.${prop.name}" type="date" placeholder="请选择${prop.displayName}"></el-date-picker>
-          </el-form-item>` : ''
+            _editItem = prop.isEdit
+              ? `
+          <el-form-item label="${prop.displayName}" ${
+                  prop.isValidate ? 'prop="' + prop.name + '"' : ''
+                }>
+            <el-date-picker v-model="form.${prop.name}" type="date" placeholder="请选择${
+                  prop.displayName
+                }"></el-date-picker>
+          </el-form-item>`
+              : '';
 
-              _detailItem = `
+            _detailItem = `
               <el-form-item label="${prop.displayName}">
                 <span>{{ detail.${prop.name} | datetime('YYYY-MM-DD') }}</span>
-              </el-form-item>`
-              break;
+              </el-form-item>`;
+            break;
 
-            case 'Boolean':
-              _searchItem = prop.isQuery ? `
+          case 'Boolean':
+            _searchItem = prop.isQuery
+              ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-select v-model="queryParams.${prop.name}" placeholder="请选择${prop.displayName}" :multiple="false">
+                    <el-select v-model="queryParams.${prop.name}" placeholder="请选择${
+                  prop.displayName
+                }" :multiple="false">
                       <el-option label="全部" value=""></el-option>
                       <!--TODO 自定义选项-->
                       <el-option label="是" :value="true"></el-option>
                       <el-option label="否" :value="false"></el-option>
                     </el-select>
-                  </el-form-item>` : ''
+                  </el-form-item>`
+              : '';
 
-              _columnItem = prop.isTableShow ? `
-            <el-table-column prop="${prop.name}" label="${prop.displayName}" align="center" width="120" ${prop.isSortable ? 'sortable="custom"' : ''}>
+            _columnItem = prop.isTableShow
+              ? `
+            <el-table-column prop="${prop.name}" label="${
+                  prop.displayName
+                }" align="center" width="120" ${prop.isSortable ? 'sortable="custom"' : ''}>
               <template slot-scope="scope">
                 {{ scope.row.${prop.name} === 1 ? '是' : '否' }}
               </template>
-            </el-table-column>` : ''
+            </el-table-column>`
+              : '';
 
-              _editItem = prop.isEdit ? `
-          <el-form-item label="${prop.displayName}" ${prop.isValidate ? 'prop="' + prop.name + '"' : ''}>
-            <el-select v-model="form.${prop.name}" placeholder="请选择${prop.displayName}" :multiple="false">
+            _editItem = prop.isEdit
+              ? `
+          <el-form-item label="${prop.displayName}" ${
+                  prop.isValidate ? 'prop="' + prop.name + '"' : ''
+                }>
+            <el-select v-model="form.${prop.name}" placeholder="请选择${
+                  prop.displayName
+                }" :multiple="false">
               <el-option label="是" :value="true"></el-option>
               <el-option label="否" :value="false"></el-option>
             </el-select>
-          </el-form-item>` : ''
+          </el-form-item>`
+              : '';
 
-              _detailItem = `
+            _detailItem = `
               <el-form-item label="${prop.displayName}">
                 <span>{{ detail.${prop.name} === 1 ? '是' : '否' }}</span>
-              </el-form-item>`
-              break;
+              </el-form-item>`;
+            break;
 
-            case 'ID':
-              _searchItem = prop.isQuery ? `
+          case 'ID':
+            _searchItem = prop.isQuery
+              ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${prop.displayName}关键字"></el-input>
-                  </el-form-item>` : ''
+                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${
+                  prop.displayName
+                }关键字"></el-input>
+                  </el-form-item>`
+              : '';
 
-              _columnItem = prop.isTableShow ? `
-            <el-table-column prop="${prop.name}" label="${prop.displayName}" align="center" width="80" ${prop.isSortable ? 'sortable="custom"' : ''}>
+            _columnItem = prop.isTableShow
+              ? `
+            <el-table-column prop="${prop.name}" label="${
+                  prop.displayName
+                }" align="center" width="80" ${prop.isSortable ? 'sortable="custom"' : ''}>
               <template slot-scope="scope">
                 {{ scope.row.${prop.name} }}
               </template>
-            </el-table-column>` : ''
+            </el-table-column>`
+              : '';
 
-              _editItem = `
-          <el-input type="hidden" v-model="form.${prop.name}" v-show="false"></el-input>` // ID 默认不能编辑
+            _editItem = `
+          <el-input type="hidden" v-model="form.${prop.name}" v-show="false"></el-input>`; // ID 默认不能编辑
 
-              _detailItem = `
+            _detailItem = `
               <el-form-item label="${prop.displayName}">
                 <span>{{ detail.${prop.name} }}</span>
-              </el-form-item>`
-              break;
+              </el-form-item>`;
+            break;
 
-            default:
-              break;
-          }
+          default:
+            break;
+        }
 
-          searchFormHtml += _searchItem
-          columnsHtml += _columnItem
-          editFormHtml += _editItem
-          detailFormHtml += _detailItem
-          queryParamsProps += prop.isQuery ? `
-            ${prop.name}: '',  // ${prop.displayName}` : ''
-          editFormProps += prop.isEdit ? `
-            ${prop.name}: '',  // ${prop.displayName}` : ''
-          editFormRules += prop.isValidate ? `
-            ${prop.name}: ${prop.type === 'Boolean' ? '[validate.required()]' : '[validate.requiredForSelect()]'},  // ${prop.displayName} 校验规则` : ''
-          detailFormProps += `
+        searchFormHtml += _searchItem;
+        columnsHtml += _columnItem;
+        editFormHtml += _editItem;
+        detailFormHtml += _detailItem;
+        queryParamsProps += prop.isQuery
+          ? `
             ${prop.name}: '',  // ${prop.displayName}`
-        })
+          : '';
+        editFormProps += prop.isEdit
+          ? `
+            ${prop.name}: '',  // ${prop.displayName}`
+          : '';
+        editFormRules += prop.isValidate
+          ? `
+            ${prop.name}: ${
+              prop.type === 'Boolean' ? '[validate.required()]' : '[validate.requiredForSelect()]'
+            },  // ${prop.displayName} 校验规则`
+          : '';
+        detailFormProps += `
+            ${prop.name}: '',  // ${prop.displayName}`;
+      });
 
-        this.sourceCode =
-          `<template>
+      this.sourceCode = `<template>
   <div>
     <tab-container ref="tabContainer"
                    :defaultPage="defaultPage"
@@ -678,39 +795,38 @@ ${scriptEnd}
   }
 </style>
 
-  `
+  `;
 
-        /* eslint-enable */
-
-      }
-      }
-      }
+      /* eslint-enable */
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
-  .editor {
-    margin-top: 10px;
-    width: 100%;
-    height: calc(~"100vh - 150px");
-    border: 1px solid #ccc;
-  }
+.editor {
+  margin-top: 10px;
+  width: 100%;
+  height: calc(~'100vh - 150px');
+  border: 1px solid #ccc;
+}
 
-  .tiny-select {
-    width: 90px !important;
-  }
+.tiny-select {
+  width: 90px !important;
+}
 
-  .tiny-input {
-    width: 120px !important;
-  }
+.tiny-input {
+  width: 120px !important;
+}
 
-  .label {
-    margin-bottom: 5px;
-    text-align: center;
+.label {
+  margin-bottom: 5px;
+  text-align: center;
 
-    span.tiny-select,
-    span.tiny-input {
-      font-size: 12px;
-      display: inline-block;
-    }
+  span.tiny-select,
+  span.tiny-input {
+    font-size: 12px;
+    display: inline-block;
   }
+}
 </style>

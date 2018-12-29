@@ -31,42 +31,42 @@
 </template>
 
 <script>
-  import editor from '@/components/VueBrace'
+import editor from '@/components/VueBrace';
 
-  export default {
-    name: 'codeEditor',
-    components: {
-      editor
-    },
-    data() {
-      return {
-        lang: 'javascript',
-        theme: 'github',
-        sourceCode: '',
-        options: {
-          enableBasicAutocompletion: true, // 自动补全
-          highlightActiveLine: true,
-          highlightSelectedWord: true,
-          useWorker: true, // ace lint
-        },
-        sourceCodeEditor: null,  // editor 引用
-      }
-    },
-
-    methods: {
-      sourceCodeEditorInit(editor) {
-        // 获取 editor 引用
-        this.sourceCodeEditor = editor
+export default {
+  name: 'codeEditor',
+  components: {
+    editor,
+  },
+  data() {
+    return {
+      lang: 'javascript',
+      theme: 'github',
+      sourceCode: '',
+      options: {
+        enableBasicAutocompletion: true, // 自动补全
+        highlightActiveLine: true,
+        highlightSelectedWord: true,
+        useWorker: true, // ace lint
       },
-    }
-  }
+      sourceCodeEditor: null, // editor 引用
+    };
+  },
+
+  methods: {
+    sourceCodeEditorInit(editor) {
+      // 获取 editor 引用
+      this.sourceCodeEditor = editor;
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
-  .editor {
-    margin-top: 10px;
-    width: 100%;
-    height: 500px;
-    border: 1px solid #ccc;
-  }
+.editor {
+  margin-top: 10px;
+  width: 100%;
+  height: 500px;
+  border: 1px solid #ccc;
+}
 </style>
