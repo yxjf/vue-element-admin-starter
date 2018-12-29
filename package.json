@@ -5,8 +5,9 @@
   "description": "A vue admin template with ElementUI for most management system",
   "author": "jnoodle <fullstack@126.com>",
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --open  --mode development",
     "build": "vue-cli-service build",
+    "build:test": "vue-cli-service build --mode test",
     "lint": "vue-cli-service lint",
     "lint:style": "stylelint  --fix \"src/**/*.less\" --syntax less",
     "lint-staged": "lint-staged",

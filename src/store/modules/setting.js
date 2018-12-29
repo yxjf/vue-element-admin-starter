@@ -25,8 +25,8 @@ const actions = {
 // mutations
 const mutations = {
   [mutationTypes.TOGGLE_SIDEBAR_COLLAPSE](state) {
-    store.set(settingKey, state);
     state.sidebarCollapse = !state.sidebarCollapse;
+    store.set(settingKey, state);
   },
 };
 
