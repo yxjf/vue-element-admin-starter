@@ -14,7 +14,7 @@
       </el-col>
       <el-col :span="16">
         <p class="small">
-          这里主要是快速生成带有大列表、查询、新建、修改、删除功能的页面代码，
+          这里主要是快速生成带有数据列表、查询、新建、修改、删除功能的页面代码，
           <router-link :to="{ name: 'generator.sample' }">
             <el-button type="text">效果例子</el-button>
           </router-link>
@@ -505,7 +505,7 @@ export default {
       this.sourceCode = `<template>
   <div>
     <tab-container ref="tabContainer"
-                   :defaultPage="defaultPage"
+                   :defaultTab="defaultTab"
                    :tabRemove="tabRemove"
                    :tabCreate="tabCreate">
       <!--数据列表页-->
@@ -599,7 +599,7 @@ ${scriptBegin}
           deleteUrl: api.sample_delete,  // TODO 删除接口
           queryParams: {${queryParamsProps}
           },
-          defaultPage: {
+          defaultTab: {
             label: '数据列表',
             name: 'default',
             slotName: 'default',

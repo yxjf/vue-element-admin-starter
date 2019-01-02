@@ -2,7 +2,7 @@
   <div>
     <tab-container
       ref="tabContainer"
-      :defaultPage="defaultPage"
+      :defaultTab="defaultTab"
       :tabRemove="tabRemove"
       :tabCreate="tabCreate"
     >
@@ -219,7 +219,7 @@ export default {
         status: '', // 状态
         updateTime: '', // 更新日期
       },
-      defaultPage: {
+      defaultTab: {
         label: '数据列表',
         name: 'default',
         slotName: 'default',

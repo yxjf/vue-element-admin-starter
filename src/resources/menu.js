@@ -51,7 +51,7 @@ const menu = [
         path: 'bigTable',
         component: () => import('@/views/example/bigTable'),
         meta: {
-          title: '大列表',
+          title: '数据列表',
           icon: 'fa fa-table',
         },
       },

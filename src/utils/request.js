@@ -88,22 +88,24 @@ request.interceptors.response.use(
         default:
           Notification.error({
             title: '错误',
-            message: res.message,
+            message: res.message || '请求错误',
             duration: 10000,
           });
           break;
       }
 
-      return Promise.reject('error');
+      // 这里是继续还是reject，根据具体业务需要调整
+      console.error('业务错误: %o', res);
+      return Promise.reject(res);
     }
     return res.data;
   },
   error => {
-    console.error(error);
     loadingInstance && loadingInstance.close();
+    console.error(error);
     Notification.error({
       title: '错误',
-      message: error.message,
+      message: error.message || '请求错误',
       duration: 10000,
     });
     return Promise.reject(error);

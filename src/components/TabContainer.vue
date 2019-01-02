@@ -1,12 +1,17 @@
 <template>
   <div class="tab-container">
-    <el-tabs v-model="activeName" @tab-click="handleClick" @tab-remove="handleRemove">
+    <el-tabs
+      v-model="activeName"
+      :type="tabType"
+      @tab-click="handleTabClick"
+      @tab-remove="handleTabRemove"
+    >
       <el-tab-pane
-        :label="defaultPage.label || '默认页'"
-        :name="defaultPage.name || 'default'"
-        :closable="defaultPage.closable || false"
+        :label="defaultTab.label || '默认页'"
+        :name="defaultTab.name || 'default'"
+        :closable="defaultTab.closable || false"
       >
-        <slot :name="defaultPage.slotName || 'default'"></slot>
+        <slot :name="defaultTab.slotName || 'default'" :data="defaultTab.data"></slot>
       </el-tab-pane>
       <el-tab-pane
         v-for="item in pages"
@@ -15,7 +20,7 @@
         :closable="item.closable"
         :key="item.name"
       >
-        <slot :name="item.slotName"></slot>
+        <slot :name="item.slotName" :data="item.data"></slot>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -28,8 +33,23 @@ import event from '@/utils/event';
 export default {
   name: 'TabContainer',
   props: {
+    // 风格类型
+    tabType: {
+      type: String,
+      required: false,
+      default: '',
+    },
     // 默认开启页
-    defaultPage: {
+    // 格式：
+    // {
+    //   label: 标签页标题
+    //   name: 与标签页 activeName 对应的标识符，表示标签页别名
+    //   slotName: 标签页内容slot name
+    //   closable: 标签是否可关闭，默认 false
+    //   disabled: 是否禁用，默认 false
+    //   data: 需要传递给标签页slot的props
+    // }
+    defaultTab: {
       type: Object,
     },
     // tab 新建时触发
@@ -50,7 +70,7 @@ export default {
   },
   data() {
     return {
-      activeName: this.defaultPage.name,
+      activeName: this.defaultTab.name,
       pages: [],
       length: 0,
       tabPage: {},
@@ -63,7 +83,7 @@ export default {
       this.openTabPage(tabPage, cb);
     });
     this.$on(event.CLOSE_TAB, (tabPageName, cb) => {
-      this.handleRemove(tabPageName, cb);
+      this.handleTabRemove(tabPageName, cb);
     });
     this.$on(event.ACTIVE_TAB, (tabPageName, cb) => {
       this.activeName = tabPageName;
@@ -75,13 +95,13 @@ export default {
   },
   methods: {
     // 关闭页面
-    handleRemove(targetName, cb) {
+    handleTabRemove(targetName, cb) {
       const tabs = this.pages.filter(tab => {
         return tab.name !== targetName;
       });
       this.pages = tabs;
       // 设置关闭后默认打开的标签页
-      this.activeName = tabs.length > 0 ? tabs[tabs.length - 1].name : this.defaultPage.name;
+      this.activeName = tabs.length > 0 ? tabs[tabs.length - 1].name : this.defaultTab.name;
 
       if (cb && typeof cb === 'function') {
         cb(this.activeName);
@@ -92,7 +112,7 @@ export default {
       }
     },
     // tab 被选中时触发
-    handleClick(tab) {
+    handleTabClick(tab) {
       if (this.tabClick) {
         this.tabClick(tab);
       }
@@ -101,7 +121,7 @@ export default {
     openTabPage(tabPage, cb) {
       // 先关闭存在的同名的，再打开
       if (this.pages.some(item => item.name === tabPage.name)) {
-        this.handleRemove(tabPage.name);
+        this.handleTabRemove(tabPage.name);
       }
 
       this.$nextTick(() => {

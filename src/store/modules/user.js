@@ -18,7 +18,7 @@ const defaultState = {
 };
 
 // initial state
-const state = { ...defaultState, ...(store.get(userKey) || {}) };
+const state = Object.assign({}, defaultState, store.get(userKey) || {});
 
 // getters
 const getters = {
