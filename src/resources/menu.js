@@ -92,6 +92,15 @@ const menu = [
               icon: 'fa fa-code',
             },
           },
+          {
+            name: 'example.component.wysiwyg',
+            path: 'wysiwygEditor',
+            component: () => import('@/views/example/wysiwygEditor'),
+            meta: {
+              title: '多功能编辑器',
+              icon: 'fa fa-edit',
+            },
+          },
         ],
       },
     ],

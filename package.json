@@ -22,6 +22,8 @@
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "store": "^2.0.12",
+    "tiptap": "^1.7.0",
+    "tiptap-extensions": "^1.7.0",
     "vue": "^2.5.21",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1"

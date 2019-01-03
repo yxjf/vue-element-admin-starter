@@ -325,3 +325,14 @@ body {
     color: #909399;
   }
 }
+
+// http://fontello.com/ 从 svg 生成 fonticon
+@import './css/fontello.css';
+
+[class^='icon-']:before,
+[class*=' icon-']:before {
+  font-size: inherit;
+  text-rendering: auto;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
