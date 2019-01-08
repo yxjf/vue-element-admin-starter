@@ -45,6 +45,8 @@ export default {
       sourceCode: '',
       options: {
         enableBasicAutocompletion: true, // 自动补全
+        enableSnippets: true,
+        enableLiveAutocompletion: true,
         highlightActiveLine: true,
         highlightSelectedWord: true,
         useWorker: true, // ace lint
