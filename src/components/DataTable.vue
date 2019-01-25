@@ -14,7 +14,13 @@
         border
         highlight-current-row
       >
-        <el-table-column label="序号" width="60" align="center" class-name="list-order">
+        <el-table-column
+          label="序号"
+          width="60"
+          align="center"
+          class-name="list-order"
+          v-if="showPageIndex"
+        >
           <template slot-scope="scope">
             <span>{{ scope.row.pageIndex }}</span>
           </template>
@@ -49,6 +55,11 @@ export default {
     defaultSort: {
       type: Object,
     },
+    // 是否显示pageIndex列
+    showPageIndex: {
+      type: Boolean,
+      default: false,
+    },
     // 没有数据显示文字
     emptyText: {
       type: String,
@@ -77,6 +88,12 @@ export default {
       type: Function,
       required: false,
     },
+    //  是否默认渲染
+    defaultRender: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   data() {
     return {
@@ -98,7 +115,9 @@ export default {
     this.$on(event.REFRESH_CURRENT_DATA, function() {
       this.load();
     });
-    this.load();
+    if (this.defaultRender) {
+      this.load();
+    }
   },
   methods: {
     handleSizeChange(val) {
@@ -136,7 +155,6 @@ export default {
         },
         this.queryParams
       );
-
       request({
         url: this.apiUrl,
         method: 'post',
@@ -151,6 +169,7 @@ export default {
               return item;
             });
           this.total = d.total;
+          return d;
         })
         .then(d => {
           if (this.loadCallback) {

@@ -5,7 +5,8 @@
     </div>
     <el-dropdown placement="bottom">
       <span class="el-dropdown-link">
-        {{ userInfo.displayName || '用户' }} <i class="el-icon-arrow-down el-icon--right"></i>
+        <i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;{{ userInfo.displayName || '用户' }}
+        <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item @click.native="logout">退出系统</el-dropdown-item>
