@@ -38,7 +38,8 @@ const getters = {
 // actions
 const actions = {
   // 登录
-  [actionTypes.login]({ commit }, username, password) {
+  [actionTypes.login]({ commit }, { username, password }) {
+    console.log(password);
     return new Promise((resolve, reject) => {
       login(username.trim(), password)
         .then(data => {

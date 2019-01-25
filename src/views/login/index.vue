@@ -79,7 +79,10 @@ export default {
         if (valid) {
           this.loginPending = true;
           this.$store
-            .dispatch(actionTypes.login, this.loginForm.username, this.loginForm.password)
+            .dispatch(actionTypes.login, {
+              username: this.loginForm.username,
+              password: this.loginForm.password,
+            })
             .then(() => {
               this.$router.push({ path: '/' });
             })
