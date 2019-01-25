@@ -4,101 +4,95 @@
  * https://github.com/ctimmerm/axios-mock-adapter
  */
 
-export default function(mock) {
-  // 随机字符串
-  const lorem =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+import Mock from 'mockjs';
 
-  mock.onPost('/user/login').reply(200, {
-    data: {
-      token: '123',
-      userInfo: {
-        id: '1',
-        userName: 'admin',
-        displayName: '管理员',
-      },
-      role: ['系统管理员', '业务员'],
-      resource: [
-        { type: 'menu', name: 'welcome' },
-        { type: 'menu', name: 'welcome.index' },
-        { type: 'menu', name: 'example' },
-        { type: 'menu', name: 'example.bigTable' },
-        { type: 'menu', name: 'example.bigForm' },
-        { type: 'menu', name: 'example.tabPage' },
-        { type: 'menu', name: 'example.component' },
-        { type: 'menu', name: 'example.component.codeEditor' },
-        { type: 'api', name: '/user/login' },
-        { type: 'api', name: '/user/logout' },
-        { type: 'api', name: '/example/bigTable' },
-        { type: 'action', name: 'example.bigTable.addUser' },
-      ],
-    },
-    message: '',
-    status: 0,
+export default function(mock) {
+  mock.onPost('/user/login').reply(() => {
+    return [
+      200,
+      Mock.mock({
+        data: {
+          token: /[a-zA-Z0-9]{32}/,
+          userInfo: {
+            id: '@id',
+            userName: 'admin',
+            displayName: '管理员',
+          },
+          role: ['系统管理员', '业务员'],
+          resource: [
+            { type: 'menu', name: 'welcome' },
+            { type: 'menu', name: 'welcome.index' },
+            { type: 'menu', name: 'example' },
+            { type: 'menu', name: 'example.bigTable' },
+            { type: 'menu', name: 'example.bigForm' },
+            { type: 'menu', name: 'example.tabPage' },
+            { type: 'menu', name: 'example.component' },
+            { type: 'menu', name: 'example.component.codeEditor' },
+            { type: 'api', name: '/user/login' },
+            { type: 'api', name: '/user/logout' },
+            { type: 'api', name: '/example/bigTable' },
+            { type: 'action', name: 'example.bigTable.addUser' },
+          ],
+        },
+        message: '',
+        status: 0,
+      }),
+    ];
   });
 
   mock.onPost(/(\/example\/bigTable)|(\/sample_list)/).reply(config => {
-    let params = JSON.parse(config.data);
-    let list = [];
+    const { pageNum, pageSize } = { ...JSON.parse(config.data) };
     const total = 500;
-    const start = (params.pageNum - 1) * params.pageSize + 1;
-    for (let i = start; i < start + params.pageSize; i++) {
-      list.push({
-        id: i + ~~(Math.random() * 12345),
-        title: lorem.substr(0, Math.max(10, ~~(Math.random() * 50))),
-        description: lorem.substr(0, Math.max(100, ~~(Math.random() * 300))),
-        status: Math.random() * 2 > 1 ? true : false,
-        date: +new Date(),
-        amount: ~~(Math.random() * 1000000),
-      });
-    }
-    console.log('do search mock: %s', JSON.stringify(params));
+    const count = Math.min(pageSize, total - pageNum * pageSize);
 
     return [
       200,
-      {
+      Mock.mock({
         data: {
-          list,
+          [`list|${count}`]: [
+            {
+              id: '@integer(100, 500)',
+              title: '@city(true) @ctitle(10, 20)',
+              description: '@cparagraph',
+              'status|1': true,
+              date: '@datetime',
+              amount: '@integer(1000, 1000000)',
+            },
+          ],
           total,
         },
         message: '',
         status: 0,
-      },
+      }),
     ];
   });
 
-  mock.onPost('/sample_detail').reply(config => {
-    let params = JSON.parse(config.data);
-
-    console.log(params);
+  mock.onPost('/sample_detail').reply(() => {
     return [
       200,
-      {
+      Mock.mock({
         data: {
-          id: params.id,
-          title: lorem.substr(0, Math.max(10, ~~(Math.random() * 50))),
-          description: lorem.substr(0, Math.max(100, ~~(Math.random() * 300))),
-          status: Math.random() * 2 > 1 ? true : false,
-          date: +new Date(),
-          amount: ~~(Math.random() * 1000000),
+          id: '@integer(100, 500)',
+          title: '@city(true) @ctitle(10, 20)',
+          description: '@csentence(3, 5)',
+          'status|1': true,
+          date: '@datetime',
+          amount: '@integer(1000, 1000000)',
         },
         message: '',
         status: 0,
-      },
+      }),
     ];
   });
 
-  mock.onPost(/\/sample_(create|update|delete)/).reply(config => {
-    let params = JSON.parse(config.data);
-
-    console.log(params);
+  mock.onPost(/\/sample_(create|update|delete)/).reply(() => {
     return [
       200,
-      {
+      Mock.mock({
         data: '',
         message: '',
         status: 0,
-      },
+      }),
     ];
   });
 
