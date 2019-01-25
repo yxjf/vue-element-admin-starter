@@ -12,12 +12,15 @@ import _ from 'lodash';
 const filterMenu = function(menuObj, authMenu) {
   const _menus = _.cloneDeep(menuObj);
   return _menus.filter(menu => {
-    if (authMenu.indexOf(menu.name) > -1) {
+    // 隐藏不显示的menu
+    if (menu.hidden) return false;
+
+    if (config.needPermission === false || authMenu.indexOf(menu.name) > -1) {
       // 对子菜单进行递归过滤
       if (menu.children && menu.children.length > 0) {
         menu.children = filterMenu(menu.children, authMenu);
 
-        // 过滤掉子菜单全部没有权限的主菜单
+        // 过滤掉子菜单全部没有权限或不显示的主菜单
         if (menu.children && menu.children.length === 0) {
           return false;
         }

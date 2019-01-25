@@ -11,11 +11,13 @@ import 'normalize.css/normalize.css';
 // 引入 ElementUI http://element-cn.eleme.io
 // 因为用于后台管理系统，一般是内网使用，所以不做按需引入
 import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
 import locale from 'element-ui/lib/locale/lang/zh-CN'; // 语言文件
 
 // 进度条样式
 import 'nprogress/nprogress.css';
+
+// font-awesome
+import 'font-awesome/css/font-awesome.css';
 
 // 引入全局样式，所有 global 样式设置在这里
 import './assets/main.less';
