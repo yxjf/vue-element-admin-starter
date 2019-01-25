@@ -51,6 +51,12 @@ export default {
     // }
     defaultTab: {
       type: Object,
+      required: true,
+    },
+    // 其他默认显示的标签页
+    otherTabs: {
+      type: Array,
+      required: false,
     },
     // tab 新建时触发
     tabCreate: {
@@ -71,7 +77,7 @@ export default {
   data() {
     return {
       activeName: this.defaultTab.name,
-      pages: [],
+      pages: this.otherTabs || [],
       length: 0,
       tabPage: {},
       index: 0,
