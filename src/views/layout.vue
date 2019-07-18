@@ -1,18 +1,19 @@
 <template>
   <div class="wrapper">
     <el-container>
-      <el-header> <topbar></topbar> </el-header>
       <el-container>
-        <el-aside :class="{ collapse: sidebarCollapse }">
+        <el-aside :class="{ collapse: sidebarCollapse }" id="main-aside">
           <sidebar :is-collapse="sidebarCollapse"></sidebar>
         </el-aside>
-        <el-container>
-          <el-header> <navbar :is-collapse="sidebarCollapse"></navbar> </el-header>
+        <el-container :class="{ collapse: sidebarCollapse }">
+          <el-header id="main-header">
+            <navbar :is-collapse="sidebarCollapse"></navbar>
+          </el-header>
           <el-main id="main-container">
-            <transition name="fade" mode="out-in"> <router-view></router-view> </transition>
-            <div class="back-top" v-show="backTopVisible" @click="backToTop">
-              <i class="fa fa-chevron-up"></i>
-            </div>
+            <transition name="fade" mode="out-in">
+              <router-view></router-view>
+            </transition>
+            <div class="back-top" v-show="backTopVisible" @click="backToTop"></div>
           </el-main>
         </el-container>
       </el-container>
@@ -21,7 +22,6 @@
 </template>
 
 <script>
-import Topbar from '@/components/Topbar';
 import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
 import _ from 'lodash';
@@ -30,7 +30,6 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'layout',
   components: {
-    Topbar,
     Navbar,
     Sidebar,
   },
@@ -65,10 +64,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-#main-container {
-  height: calc(100vh - 100px);
-  padding-bottom: 50px;
-}
-</style>

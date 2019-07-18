@@ -1,30 +1,29 @@
 <template>
-  <el-menu class="navbar" mode="horizontal">
-    <div class="toggle-sidebar" :class="{ collapse: isCollapse }" @click.prevent="toggleSideBar">
-      <i class="fa fa-bars"></i>
-    </div>
-    <breadcrumb></breadcrumb>
-  </el-menu>
+  <el-row type="flex" class="navbar" justify="space-between">
+    <el-col :span="18">
+      <breadcrumb :is-collapse="isCollapse"></breadcrumb>
+    </el-col>
+    <el-col :span="6">
+      <topbar></topbar>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import actionTypes from '@/store/action-types';
 import Breadcrumb from '@/components/Breadcrumb';
+import Topbar from '@/components/Topbar';
 
 export default {
   name: 'Navbar',
   components: {
     Breadcrumb,
+    Topbar,
   },
   props: {
     isCollapse: {
       type: Boolean,
       default: false,
     },
-  },
-  methods: {
-    ...mapActions([actionTypes.toggleSideBar]),
   },
 };
 </script>

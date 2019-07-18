@@ -1,12 +1,13 @@
 <template>
   <el-scrollbar wrapClass="scrollbar-wrapper">
+    <div class="brand"></div>
     <el-menu
       mode="vertical"
       :show-timeout="200"
       :default-active="$route.name"
       :collapse="isCollapse"
       @select="handleSelect"
-      background-color="#4a5064"
+      background-color="#25314C"
       text-color="#fff"
       active-text-color="#00c1de"
     >

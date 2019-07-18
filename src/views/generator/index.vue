@@ -290,9 +290,7 @@ export default {
             _searchItem = prop.isQuery
               ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${
-                  prop.displayName
-                }关键字"></el-input>
+                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${prop.displayName}关键字"></el-input>
                   </el-form-item>`
               : '';
 
@@ -328,9 +326,7 @@ export default {
             _searchItem = prop.isQuery
               ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-input type="number" v-model="queryParams.${prop.name}" placeholder="请输入${
-                  prop.displayName
-                }关键字"></el-input>
+                    <el-input type="number" v-model="queryParams.${prop.name}" placeholder="请输入${prop.displayName}关键字"></el-input>
                   </el-form-item>`
               : '';
 
@@ -404,9 +400,7 @@ export default {
             _searchItem = prop.isQuery
               ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-select v-model="queryParams.${prop.name}" placeholder="请选择${
-                  prop.displayName
-                }" :multiple="false">
+                    <el-select v-model="queryParams.${prop.name}" placeholder="请选择${prop.displayName}" :multiple="false">
                       <el-option label="全部" value=""></el-option>
                       <!--TODO 自定义选项-->
                       <el-option label="是" :value="true"></el-option>
@@ -450,9 +444,7 @@ export default {
             _searchItem = prop.isQuery
               ? `
                   <el-form-item label="${prop.displayName}">
-                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${
-                  prop.displayName
-                }关键字"></el-input>
+                    <el-input type="text" v-model="queryParams.${prop.name}" placeholder="请输入${prop.displayName}关键字"></el-input>
                   </el-form-item>`
               : '';
 

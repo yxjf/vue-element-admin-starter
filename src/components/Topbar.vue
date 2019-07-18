@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <div class="brand">
-      <h2>{{ systemName }}</h2>
-    </div>
+  <div class="topbar">
     <el-dropdown placement="bottom">
       <span class="el-dropdown-link">
         <i class="fa fa-user-circle-o"></i>&nbsp;&nbsp;{{ userInfo.displayName || '用户' }}

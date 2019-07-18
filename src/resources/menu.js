@@ -22,7 +22,7 @@ const menu = [
     redirect: '/welcome',
     meta: {
       title: '首页',
-      icon: 'fa fa-home',
+      icon: 'fa fa-yx-home',
     },
     children: [
       {
@@ -31,7 +31,7 @@ const menu = [
         component: () => import('@/views/welcome/index'),
         meta: {
           title: '首页',
-          icon: 'fa fa-home',
+          icon: 'fa fa-yx-home',
         },
       },
     ],
@@ -43,7 +43,7 @@ const menu = [
     redirect: '/example/bigTable',
     meta: {
       title: '组件示例',
-      icon: 'fa fa-th',
+      icon: 'fa fa-yx-feature',
     },
     children: [
       {
@@ -52,7 +52,6 @@ const menu = [
         component: () => import('@/views/example/bigTable'),
         meta: {
           title: '数据列表',
-          icon: 'fa fa-table',
         },
       },
       {
@@ -61,7 +60,6 @@ const menu = [
         component: () => import('@/views/example/bigForm'),
         meta: {
           title: '表单',
-          icon: 'fa fa-edit',
         },
       },
       {
@@ -70,7 +68,6 @@ const menu = [
         component: () => import('@/views/example/tabPage'),
         meta: {
           title: '带标签页面',
-          icon: 'fa fa-folder-o',
         },
       },
       {
@@ -80,7 +77,7 @@ const menu = [
         component: EmptyContainer,
         meta: {
           title: '特殊组件',
-          icon: 'fa fa-table',
+          icon: 'fa fa-yx-component',
         },
         children: [
           {
@@ -89,7 +86,6 @@ const menu = [
             component: () => import('@/views/example/codeEditor'),
             meta: {
               title: '代码编辑器',
-              icon: 'fa fa-code',
             },
           },
           {
@@ -98,7 +94,6 @@ const menu = [
             component: () => import('@/views/example/wysiwygEditor'),
             meta: {
               title: '多功能编辑器',
-              icon: 'fa fa-edit',
             },
           },
         ],
@@ -113,7 +108,7 @@ const menu = [
     redirect: '/generator/index',
     meta: {
       title: '代码生成',
-      icon: 'fa fa-file-code-o',
+      icon: 'fa fa-yx-data',
     },
     children: [
       {
@@ -122,7 +117,6 @@ const menu = [
         component: () => import('@/views/generator/index'),
         meta: {
           title: '代码生成器',
-          icon: 'fa fa-file-code-o',
         },
       },
       {
@@ -131,7 +125,6 @@ const menu = [
         component: () => import('@/views/generator/sample'),
         meta: {
           title: '代码生成样例',
-          icon: 'fa fa-file-o',
         },
       },
       {
@@ -140,7 +133,6 @@ const menu = [
         component: () => import('@/views/generator/test'),
         meta: {
           title: '测试生成代码',
-          icon: 'fa fa-flask',
         },
       },
     ],

@@ -13,7 +13,7 @@
       </el-menu-item>
 
       <!--有多个子元素的菜单资源多级显示-->
-      <el-submenu v-else :index="item.name" :key="item.name">
+      <el-submenu v-else :index="item.name" :key="item.name" popper-class="popper-item">
         <template slot="title">
           <i :class="[item.meta.icon || 'fa fa-navicon']"></i>
           <span slot="title">{{ item.meta.title }}</span>
