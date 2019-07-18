@@ -22,6 +22,7 @@ Dependencies:
 - [tiptap](https://github.com/thlorenz/brace) A rich-text editor for Vue.js
 - [tiptap-extensions](https://github.com/thlorenz/brace) Tiptap Extensions
 - [font-awesome](https://fontawesome.com/v4.7.0/icons/) Font Icons
+- [fontello](http://fontello.com/) Font Icons Generator
 
 ## Build Setup
 

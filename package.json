@@ -1,6 +1,6 @@
 {
   "name": "vue-element-admin-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "description": "A vue admin template with ElementUI for most management system",
   "author": "jnoodle <fullstack@126.com>",
@@ -14,35 +14,35 @@
     "prettier": "node ./scripts/prettier.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "axios-mock-adapter": "^1.16.0",
+    "axios": "^0.19.0",
+    "axios-mock-adapter": "^1.17.0",
     "brace": "^0.11.1",
-    "element-ui": "^2.4.11",
+    "element-ui": "^2.10.1",
     "font-awesome": "4.7",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "mockjs": "^1.0.1-beta3",
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "store": "^2.0.12",
-    "tiptap": "^1.7.0",
-    "tiptap-extensions": "^1.7.0",
-    "vue": "^2.5.21",
-    "vue-router": "^3.0.2",
-    "vuex": "^3.0.1"
+    "tiptap": "^1.23.2",
+    "tiptap-extensions": "^1.24.2",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.7",
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.2.0",
-    "@vue/cli-plugin-eslint": "^3.2.1",
-    "@vue/cli-service": "^3.2.0",
+    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-plugin-eslint": "^3.9.2",
+    "@vue/cli-service": "^3.9.2",
     "less": "^3.9.0",
-    "less-loader": "^4.1.0",
-    "lint-staged": "^8.1.0",
-    "prettier": "^1.15.3",
-    "stylelint": "^9.9.0",
-    "stylelint-config-prettier": "^4.0.0",
-    "stylelint-config-standard": "^18.2.0",
-    "vue-template-compiler": "^2.5.21"
+    "less-loader": "^5.0.0",
+    "lint-staged": "^9.2.0",
+    "prettier": "^1.18.2",
+    "stylelint": "^10.1.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-standard": "^18.3.0",
+    "vue-template-compiler": "^2.6.10"
   },
   "engines": {
     "node": ">= 8.0.0"
