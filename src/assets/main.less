@@ -175,10 +175,33 @@ body {
   thead {
     tr,
     th {
-      color: #adafba;
+      color: #7e7f87;
       background-color: #f5f7fa !important;
       text-align: center !important;
     }
+  }
+
+  .cell {
+    line-height: 1.6;
+  }
+
+  .caret-wrapper {
+    height: 20px;
+
+    .sort-caret.ascending {
+      top: -2px;
+    }
+
+    .sort-caret.descending {
+      bottom: 0;
+    }
+  }
+}
+
+.el-table--small {
+  td,
+  th {
+    padding: 5px 0 !important;
   }
 }
 
@@ -450,6 +473,17 @@ body {
       }
     }
 
+    i.fa-navicon {
+      background-size: 4px;
+      background-position: 10px 13px;
+      background-repeat: no-repeat;
+      background-image: url(../assets/icon/dot.png);
+
+      &::before {
+        content: '' !important;
+      }
+    }
+
     .el-scrollbar {
       border-right: solid 1px #e6e6e6;
       //height: calc(~"100vh - 10px");
@@ -535,6 +569,10 @@ body {
                 background-size: 6px;
                 background-position: 11px 11px;
                 background-image: url(../assets/icon/dotHover.png);
+              }
+
+              span {
+                color: #fe7437;
               }
             }
           }
@@ -634,11 +672,17 @@ body {
     }
   }
 
-  .is-active {
-    color: #fff !important;
+  .el-submenu.is-active {
+    .el-submenu__title {
+      background-color: #374462 !important;
+    }
+  }
+
+  .el-menu-item.is-active {
+    color: #fe7437 !important;
     //background-color: #374462 !important;
 
-    i.fa {
+    > i.fa {
       background-size: 6px;
       background-position: 11px 11px;
       background-image: url(../assets/icon/dotHover.png);
