@@ -248,6 +248,7 @@ import {
   Image,
 } from 'tiptap-extensions';
 
+let si;
 export default {
   components: {
     EditorContent,
@@ -313,7 +314,20 @@ export default {
   data() {
     console.log(this.value);
     return {
-      editor: new Editor({
+      editor: null,
+      linkUrl: null,
+      linkMenuIsActive: false,
+    };
+  },
+  watch: {
+    // value() {
+    //   this.editor.setContent(this.value)
+    // }
+  },
+  created() {
+    // 新版 tiptap 有 pluginKey 重复 bug，导致 this.editor 赋值失败，这里多次赋值生成，保证不重复
+    si = setInterval(() => {
+      this.editor = new Editor({
         editable: this.editable,
         extensions: [
           new Placeholder({
@@ -349,18 +363,13 @@ export default {
           this.onUpdate(obj);
         },
         content: this.value,
-      }),
-      linkUrl: null,
-      linkMenuIsActive: false,
-    };
-  },
-  watch: {
-    // value() {
-    //   this.editor.setContent(this.value)
-    // }
-  },
-  mounted() {
-    this.getEditor(this.editor);
+      });
+
+      if (this.editor) {
+        clearInterval(si);
+        this.getEditor(this.editor);
+      }
+    }, 200);
   },
   beforeDestroy() {
     this.editor.destroy();
@@ -441,9 +450,11 @@ export default {
     padding-left: 0.8rem;
     font-style: italic;
   }
+
   img {
     max-width: 100%;
   }
+
   table {
     border-collapse: collapse;
     table-layout: fixed;
@@ -451,6 +462,7 @@ export default {
     margin: 0;
     overflow: hidden;
   }
+
   table td,
   table th {
     min-width: 1em;
