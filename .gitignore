@@ -20,3 +20,6 @@ yarn-error.log*
 *.sln
 *.sw*
 stdout.log
+
+/src/assets/logo.psd
+/src/assets/logo-s.psd
