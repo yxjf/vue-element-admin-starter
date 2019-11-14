@@ -16,6 +16,7 @@
 import { mapGetters } from 'vuex';
 import config from '@/config';
 import actionTypes from '@/store/action-types';
+import auth from '@/utils/authenticate';
 
 export default {
   name: 'Topbar',
@@ -36,7 +37,8 @@ export default {
       })
         .then(() => {
           this.$store.dispatch(actionTypes.logout).then(() => {
-            this.$router.push({ path: '/login' });
+            // this.$router.push({ path: '/login' });
+            auth.ssoGoToLogout();
           });
         })
         .catch(() => {});

@@ -1,6 +1,6 @@
 import store from 'store';
 import config from '@/config';
-import { login, logout } from '@/api/login';
+import { login, logout, ssoAuth, getCurrentUser } from '@/api/login';
 import actionTypes from '../action-types';
 import mutationTypes from '../mutation-types';
 
@@ -37,11 +37,37 @@ const getters = {
 
 // actions
 const actions = {
-  // 登录
+  // 登录, SSO登录用不到这个action
   [actionTypes.login]({ commit }, { username, password }) {
-    console.log(password);
     return new Promise((resolve, reject) => {
       login(username.trim(), password)
+        .then(data => {
+          commit(mutationTypes.SET_USERINFO, data);
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  // sso鉴权：casServer在用户AD认证通过，跳转回来页面，页面拿到username和encryptedTgtId参数，请求后端sso鉴权
+  [actionTypes.ssoAuth]({ commit }, { username, encryptedTgtId }) {
+    return new Promise((resolve, reject) => {
+      ssoAuth(username.trim(), encryptedTgtId)
+        .then(data => {
+          // console.log('actionTypes.ssoAuth', data);
+          commit(mutationTypes.SET_TOKEN, data.token);
+          resolve(data);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  },
+  // 鉴权成功后获取用户信息
+  [actionTypes.getCurrentUser]({ commit }) {
+    return new Promise((resolve, reject) => {
+      getCurrentUser()
         .then(data => {
           commit(mutationTypes.SET_USERINFO, data);
           resolve(data);
@@ -69,7 +95,9 @@ const actions = {
 // mutations
 const mutations = {
   [mutationTypes.SET_USERINFO](state, data) {
-    state.userInfo = { ...data.userInfo };
+    state.userInfo = {
+      ...data.userInfo,
+    };
     state.token = data.token;
     state.role = [...data.role];
     state.resource = [...data.resource];

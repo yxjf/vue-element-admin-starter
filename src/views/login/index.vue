@@ -1,6 +1,6 @@
 <template>
   <div class="login-container">
-    <el-form
+    <!-- <el-form
       class="login-form"
       autoComplete="on"
       :model="loginForm"
@@ -48,13 +48,15 @@
           登 录
         </el-button>
       </el-form-item>
-    </el-form>
+    </el-form>-->
   </div>
 </template>
 
 <script>
 import validate from '@/utils/validate';
 import actionTypes from '@/store/action-types';
+import auth from '@/utils/authenticate';
+import Vue from 'vue';
 
 export default {
   name: 'login',
@@ -71,6 +73,13 @@ export default {
       loginPending: false,
       showPwd: false,
     };
+  },
+  created() {
+    // 直接跳转到sso登录
+    Vue.prototype.$loading({
+      text: '系统初始化...',
+    });
+    auth.ssoGoToLogin();
   },
   mounted() {},
   methods: {

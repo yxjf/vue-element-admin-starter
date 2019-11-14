@@ -16,6 +16,7 @@ export function login(username, password) {
       password,
     },
   }).then(data => {
+    console.log(data);
     if (!data.token) {
       Notification.error({
         title: '错误',
@@ -23,6 +24,47 @@ export function login(username, password) {
         duration: 0,
       });
       throw new Error('Token 错误');
+    }
+    return data;
+  });
+}
+
+// SSO鉴权，鉴权成功后将返回token及token有效期
+export function ssoAuth(username, encryptedTgtId) {
+  return request({
+    url: api.ssoAuth,
+    method: 'post',
+    data: {
+      username,
+      encryptedTgtId,
+    },
+  }).then(data => {
+    if (!data.token) {
+      Notification.error({
+        title: '错误',
+        message: 'Token 错误',
+        duration: 0,
+      });
+      throw new Error('Token 错误');
+    }
+    return data;
+  });
+}
+
+export function getCurrentUser() {
+  return request({
+    url: api.getCurrentUser,
+    method: 'post',
+    data: {},
+  }).then(data => {
+    console.log(data);
+    if (!data) {
+      Notification.error({
+        title: '错误',
+        message: '获取用户信息错误',
+        duration: 0,
+      });
+      throw new Error('获取用户信息错误');
     }
     return data;
   });

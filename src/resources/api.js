@@ -7,7 +7,10 @@
 // 接口资源
 const api = {
   login: '/user/login',
+  ssoAuth: '/user/sso/auth',
+  getCurrentUser: '/user/current',
   logout: '/user/logout',
+
   example_bigTable: '/example/bigTable',
   sample_list: '/sample_list',
   sample_create: '/sample_create',
