@@ -19,7 +19,7 @@
     "core-js": "^3.4.0",
     "element-ui": "^2.12.0",
     "font-awesome": "4.7",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mockjs": "^1.1.0",
     "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
